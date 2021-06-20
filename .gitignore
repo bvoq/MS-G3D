@@ -4,6 +4,8 @@
 runs/
 work_dir/
 
+apex/
+data/
 pretrained-models/
 pretrain_eval/
 
