@@ -1,0 +1,311 @@
+./apex/docs/source/conf.py:# See http://stackoverflow.com/a/41184353/3343043
+./apex/apex/pyprof/README.md:first_layer_fwd_kernel ['conv2d'] 411204 (128, 1, 1) (2, 7, 64) 0 7 ['imagenet.py:137', 'imagenet.py:129', '/opt/conda/lib/python3.6/site-packages/torchvision/models/resnet.py:195']
+./apex/apex/pyprof/README.md:"first_layer_fwd_kernel","torch.nn.functional","conv2d","fprop","411204","-","0","0","0","7","128,1,1","2,7,64"
+./apex/apex/pyprof/README.md:"batch_norm_collect_statistics_kernel","torch.nn.functional","batch_norm","fprop","929513","-","411041792","411041792","0","7","512,1,1","64,1,1"
+./apex/apex/pyprof/README.md:"batch_norm_transform_input_kernel","torch.nn.functional","batch_norm","fprop","377539","-","411041792","411041792","0","7","512,1,1","64,64,1"
+./apex/.git/packed-refs:b44114354ae55de50a2c60576c596c3d7151c2d8 refs/remotes/origin/amp-rnn-fixes
+./apex/.git/packed-refs:1e522ad762aded53b4a4111c8130909068b9e618 refs/remotes/origin/data_ptr_fix
+./README.md:[[PDF](https://arxiv.org/pdf/2003.14111.pdf)][[Demo](https://youtu.be/5TcHIIece38)][[Abstract/Supp](https://openaccess.thecvf.com/content_CVPR_2020/html/Liu_Disentangling_and_Unifying_Graph_Convolutions_for_Skeleton-Based_Action_Recognition_CVPR_2020_paper.html)]
+Binary file ./.git/objects/pack/pack-57f5e871f76f4e165cef7dab2120fa1426f3b7f7.pack matches
+Binary file ./imgs/cropped-fixed-read-as-type.gif matches
+Binary file ./imgs/cropped-fixed-takeoff-as-wear.gif matches
+Binary file ./imgs/cropped-fixed-wear-as-takeoff.gif matches
+Binary file ./imgs/cropped-fixed-rub.gif matches
+Binary file ./imgs/cropped-fixed-clap.gif matches
+Binary file ./imgs/cropped-fixed-type-as-read.gif matches
+Binary file ./imgs/cropped-fixed-drink.gif matches
+./pretrain_eval/gsl_openpose_old/log.txt:[ Wed May 19 21:45:00 2021 ] 	Mean test loss of 619 batches: 5.058411702200746.
+Binary file ./pretrain_eval/gsl_openpose_old/checkpoints/checkpoint-3-fwbz8-45081.pt matches
+Binary file ./pretrain_eval/gsl_openpose_old/checkpoints/checkpoint-6-fwbz8-90162.pt matches
+Binary file ./pretrain_eval/gsl_openpose_old/checkpoints/checkpoint-10-fwbz8-150270.pt matches
+Binary file ./pretrain_eval/gsl_openpose_old/checkpoints/checkpoint-13-fwbz8-195351.pt matches
+Binary file ./pretrain_eval/gsl_openpose_old/checkpoints/checkpoint-18-fwbz8-270486.pt matches
+Binary file ./pretrain_eval/gsl_openpose_old/checkpoints/checkpoint-17-fwbz8-255459.pt matches
+Binary file ./pretrain_eval/gsl_openpose_old/checkpoints/checkpoint-4-fwbz8-60108.pt matches
+Binary file ./pretrain_eval/gsl_openpose_old/checkpoints/checkpoint-11-fwbz8-165297.pt matches
+Binary file ./pretrain_eval/gsl_openpose_old/checkpoints/checkpoint-15-fwbz8-225405.pt matches
+Binary file ./pretrain_eval/gsl_openpose_old/checkpoints/checkpoint-5-fwbz8-75135.pt matches
+Binary file ./pretrain_eval/gsl_openpose_old/checkpoints/checkpoint-19-fwbz8-285513.pt matches
+Binary file ./pretrain_eval/gsl_openpose_old/checkpoints/checkpoint-8-fwbz8-120216.pt matches
+Binary file ./pretrain_eval/gsl_openpose_old/checkpoints/checkpoint-7-fwbz8-105189.pt matches
+Binary file ./pretrain_eval/gsl_openpose_old/checkpoints/checkpoint-12-fwbz8-180324.pt matches
+Binary file ./pretrain_eval/gsl_openpose_old/checkpoints/checkpoint-9-fwbz8-135243.pt matches
+Binary file ./pretrain_eval/gsl_openpose_old/checkpoints/checkpoint-16-fwbz8-240432.pt matches
+Binary file ./pretrain_eval/gsl_openpose_old/checkpoints/checkpoint-20-fwbz8-300540.pt matches
+Binary file ./pretrain_eval/gsl_openpose_old/checkpoints/checkpoint-2-fwbz8-30054.pt matches
+Binary file ./pretrain_eval/gsl_openpose_old/checkpoints/checkpoint-1-fwbz8-15027.pt matches
+Binary file ./pretrain_eval/gsl_openpose_old/checkpoints/checkpoint-14-fwbz8-210378.pt matches
+Binary file ./pretrain_eval/gsl_openpose_old/weights/weights-16-240432.pt matches
+Binary file ./pretrain_eval/gsl_openpose_old/weights/weights-14-210378.pt matches
+Binary file ./pretrain_eval/gsl_openpose_old/weights/weights-10-150270.pt matches
+Binary file ./pretrain_eval/gsl_openpose_old/weights/weights-18-270486.pt matches
+Binary file ./pretrain_eval/gsl_openpose_old/weights/weights-2-30054.pt matches
+Binary file ./pretrain_eval/gsl_openpose_old/weights/weights-9-135243.pt matches
+Binary file ./pretrain_eval/gsl_openpose_old/weights/weights-20-300540.pt matches
+Binary file ./pretrain_eval/gsl_openpose_old/weights/weights-1-15027.pt matches
+Binary file ./pretrain_eval/gsl_openpose_old/weights/weights-12-180324.pt matches
+Binary file ./pretrain_eval/gsl_openpose_old/weights/weights-6-90162.pt matches
+Binary file ./pretrain_eval/gsl_openpose_old/weights/weights-8-120216.pt matches
+Binary file ./pretrain_eval/gsl_openpose_old/weights/weights-17-255459.pt matches
+Binary file ./pretrain_eval/gsl_openpose_old/weights/weights-3-45081.pt matches
+Binary file ./pretrain_eval/gsl_openpose_old/weights/weights-7-105189.pt matches
+Binary file ./pretrain_eval/gsl_openpose_old/weights/weights-19-285513.pt matches
+Binary file ./pretrain_eval/gsl_openpose_old/weights/weights-15-225405.pt matches
+Binary file ./pretrain_eval/gsl_openpose_old/weights/weights-4-60108.pt matches
+Binary file ./pretrain_eval/gsl_openpose_old/weights/weights-5-75135.pt matches
+Binary file ./pretrain_eval/gsl_openpose_old/weights/weights-13-195351.pt matches
+Binary file ./pretrain_eval/gsl_openpose_old/weights/weights-11-165297.pt matches
+./pretrain_eval/ntu60/xview/bone/wrong-samples.txt:tensor(9411),41,58
+./pretrain_eval/ntu60/xview/bone/wrong-samples.txt:tensor(14111),44,24
+./pretrain_eval/ntu60/xview/bone/wrong-samples.txt:tensor(18411),17,18
+./pretrain_eval/ntu60/xsub/joint-fusion/wrong-samples.txt:tensor(7411),32,10
+./pretrain_eval/ntu60/xsub/joint-fusion/wrong-samples.txt:tensor(11411),16,15
+./pretrain_eval/ntu60/xsub/joint-fusion/wrong-samples.txt:tensor(14114),48,21
+./pretrain_eval/ntu60/xsub/joint-fusion/wrong-samples.txt:tensor(14118),41,25
+./pretrain_eval/ntu60/xsub/bone/wrong-samples.txt:tensor(7411),32,10
+./pretrain_eval/ntu60/xsub/bone/wrong-samples.txt:tensor(14118),41,25
+./pretrain_eval/kinetics/joint/wrong-samples.txt:tensor(411),27,109
+./pretrain_eval/kinetics/joint/wrong-samples.txt:tensor(4110),240,121
+./pretrain_eval/kinetics/joint/wrong-samples.txt:tensor(4111),77,213
+./pretrain_eval/kinetics/joint/wrong-samples.txt:tensor(4112),264,138
+./pretrain_eval/kinetics/joint/wrong-samples.txt:tensor(4114),244,352
+./pretrain_eval/kinetics/joint/wrong-samples.txt:tensor(4115),16,168
+./pretrain_eval/kinetics/joint/wrong-samples.txt:tensor(4116),243,290
+./pretrain_eval/kinetics/joint/wrong-samples.txt:tensor(4118),201,168
+./pretrain_eval/kinetics/joint/wrong-samples.txt:tensor(4119),399,75
+./pretrain_eval/kinetics/joint/wrong-samples.txt:tensor(4411),379,80
+./pretrain_eval/kinetics/joint/wrong-samples.txt:tensor(7411),134,333
+./pretrain_eval/kinetics/joint/wrong-samples.txt:tensor(10411),97,133
+./pretrain_eval/kinetics/joint/wrong-samples.txt:tensor(12411),197,103
+./pretrain_eval/kinetics/joint/wrong-samples.txt:tensor(13411),126,4
+./pretrain_eval/kinetics/joint/wrong-samples.txt:tensor(14112),391,126
+./pretrain_eval/kinetics/joint/wrong-samples.txt:tensor(14113),229,243
+./pretrain_eval/kinetics/joint/wrong-samples.txt:tensor(14114),365,6
+./pretrain_eval/kinetics/joint/wrong-samples.txt:tensor(14115),159,157
+./pretrain_eval/kinetics/joint/wrong-samples.txt:tensor(14116),136,61
+./pretrain_eval/kinetics/joint/wrong-samples.txt:tensor(14117),301,155
+./pretrain_eval/kinetics/joint/wrong-samples.txt:tensor(14119),389,194
+./pretrain_eval/kinetics/joint/wrong-samples.txt:tensor(14411),245,92
+./pretrain_eval/kinetics/joint/wrong-samples.txt:tensor(15411),42,35
+./pretrain_eval/kinetics/joint/wrong-samples.txt:tensor(17411),278,384
+./pretrain_eval/kinetics/joint/wrong-samples.txt:tensor(18411),385,118
+./pretrain_eval/kinetics/bone/wrong-samples.txt:tensor(411),27,109
+./pretrain_eval/kinetics/bone/wrong-samples.txt:tensor(4110),240,121
+./pretrain_eval/kinetics/bone/wrong-samples.txt:tensor(4111),77,213
+./pretrain_eval/kinetics/bone/wrong-samples.txt:tensor(4112),264,138
+./pretrain_eval/kinetics/bone/wrong-samples.txt:tensor(4113),258,179
+./pretrain_eval/kinetics/bone/wrong-samples.txt:tensor(4115),16,168
+./pretrain_eval/kinetics/bone/wrong-samples.txt:tensor(4116),205,290
+./pretrain_eval/kinetics/bone/wrong-samples.txt:tensor(4119),87,75
+./pretrain_eval/kinetics/bone/wrong-samples.txt:tensor(4411),185,80
+./pretrain_eval/kinetics/bone/wrong-samples.txt:tensor(6411),16,112
+./pretrain_eval/kinetics/bone/wrong-samples.txt:tensor(10411),29,133
+./pretrain_eval/kinetics/bone/wrong-samples.txt:tensor(11411),282,254
+./pretrain_eval/kinetics/bone/wrong-samples.txt:tensor(12411),19,103
+./pretrain_eval/kinetics/bone/wrong-samples.txt:tensor(13411),353,4
+./pretrain_eval/kinetics/bone/wrong-samples.txt:tensor(14111),43,313
+./pretrain_eval/kinetics/bone/wrong-samples.txt:tensor(14112),285,126
+./pretrain_eval/kinetics/bone/wrong-samples.txt:tensor(14113),229,243
+./pretrain_eval/kinetics/bone/wrong-samples.txt:tensor(14114),353,6
+./pretrain_eval/kinetics/bone/wrong-samples.txt:tensor(14115),159,157
+./pretrain_eval/kinetics/bone/wrong-samples.txt:tensor(14116),366,61
+./pretrain_eval/kinetics/bone/wrong-samples.txt:tensor(14117),68,155
+./pretrain_eval/kinetics/bone/wrong-samples.txt:tensor(14119),316,194
+./pretrain_eval/kinetics/bone/wrong-samples.txt:tensor(14411),49,92
+./pretrain_eval/kinetics/bone/wrong-samples.txt:tensor(15411),42,35
+./pretrain_eval/kinetics/bone/wrong-samples.txt:tensor(17411),67,384
+./pretrain_eval/kinetics/bone/wrong-samples.txt:tensor(18411),385,118
+./pretrain_eval/kinetics/bone/wrong-samples.txt:tensor(19411),83,184
+./pretrain_eval/ntu120/xset/joint/wrong-samples.txt:tensor(4114),46,43
+./pretrain_eval/ntu120/xset/joint/wrong-samples.txt:tensor(4115),95,44
+./pretrain_eval/ntu120/xset/joint/wrong-samples.txt:tensor(4116),46,45
+./pretrain_eval/ntu120/xset/joint/wrong-samples.txt:tensor(4117),67,46
+./pretrain_eval/ntu120/xset/joint/wrong-samples.txt:tensor(10411),35,4
+./pretrain_eval/ntu120/xset/joint/wrong-samples.txt:tensor(14117),17,20
+./pretrain_eval/ntu120/xset/joint/wrong-samples.txt:tensor(24112),37,32
+./pretrain_eval/ntu120/xset/joint/wrong-samples.txt:tensor(24113),85,33
+./pretrain_eval/ntu120/xset/joint/wrong-samples.txt:tensor(24116),95,36
+./pretrain_eval/ntu120/xset/joint/wrong-samples.txt:tensor(24117),102,37
+./pretrain_eval/ntu120/xset/joint/wrong-samples.txt:tensor(24118),95,38
+./pretrain_eval/ntu120/xset/joint/wrong-samples.txt:tensor(28411),43,40
+./pretrain_eval/ntu120/xset/joint/wrong-samples.txt:tensor(34111),93,69
+./pretrain_eval/ntu120/xset/joint/wrong-samples.txt:tensor(34112),68,70
+./pretrain_eval/ntu120/xset/joint/wrong-samples.txt:tensor(34116),72,74
+./pretrain_eval/ntu120/xset/joint/wrong-samples.txt:tensor(34118),70,76
+./pretrain_eval/ntu120/xset/joint/wrong-samples.txt:tensor(37411),73,83
+./pretrain_eval/ntu120/xset/joint/wrong-samples.txt:tensor(41111),71,70
+./pretrain_eval/ntu120/xset/joint/wrong-samples.txt:tensor(41112),69,71
+./pretrain_eval/ntu120/xset/joint/wrong-samples.txt:tensor(41113),74,72
+./pretrain_eval/ntu120/xset/joint/wrong-samples.txt:tensor(41117),68,76
+./pretrain_eval/ntu120/xset/joint/wrong-samples.txt:tensor(41124),73,83
+./pretrain_eval/ntu120/xset/joint/wrong-samples.txt:tensor(41131),82,90
+./pretrain_eval/ntu120/xset/joint/wrong-samples.txt:tensor(41133),76,92
+./pretrain_eval/ntu120/xset/joint/wrong-samples.txt:tensor(41141),34,100
+./pretrain_eval/ntu120/xset/joint/wrong-samples.txt:tensor(41143),66,102
+./pretrain_eval/ntu120/xset/joint/wrong-samples.txt:tensor(41145),78,104
+./pretrain_eval/ntu120/xset/joint/wrong-samples.txt:tensor(41147),108,106
+./pretrain_eval/ntu120/xset/joint/wrong-samples.txt:tensor(41150),108,109
+./pretrain_eval/ntu120/xset/joint/wrong-samples.txt:tensor(41162),60,61
+./pretrain_eval/ntu120/xset/joint/wrong-samples.txt:tensor(41167),68,66
+./pretrain_eval/ntu120/xset/joint/wrong-samples.txt:tensor(41171),68,70
+./pretrain_eval/ntu120/xset/joint/wrong-samples.txt:tensor(41172),68,71
+./pretrain_eval/ntu120/xset/joint/wrong-samples.txt:tensor(41173),75,72
+./pretrain_eval/ntu120/xset/joint/wrong-samples.txt:tensor(41174),81,73
+./pretrain_eval/ntu120/xset/joint/wrong-samples.txt:tensor(41175),73,74
+./pretrain_eval/ntu120/xset/joint/wrong-samples.txt:tensor(41176),72,75
+./pretrain_eval/ntu120/xset/joint/wrong-samples.txt:tensor(41177),71,76
+./pretrain_eval/ntu120/xset/joint/wrong-samples.txt:tensor(41183),90,82
+./pretrain_eval/ntu120/xset/joint/wrong-samples.txt:tensor(42411),53,110
+./pretrain_eval/ntu120/xset/joint/wrong-samples.txt:tensor(44113),28,74
+./pretrain_eval/ntu120/xset/joint/wrong-samples.txt:tensor(52411),69,70
+./pretrain_eval/ntu120/xset/joint/wrong-samples.txt:tensor(54114),71,68
+./pretrain_eval/ntu120/xset/joint/wrong-samples.txt:tensor(58411),62,61
+./pretrain_eval/ntu120/xset/bone/wrong-samples.txt:tensor(4115),95,44
+./pretrain_eval/ntu120/xset/bone/wrong-samples.txt:tensor(4116),24,45
+./pretrain_eval/ntu120/xset/bone/wrong-samples.txt:tensor(10411),38,4
+./pretrain_eval/ntu120/xset/bone/wrong-samples.txt:tensor(11411),43,46
+./pretrain_eval/ntu120/xset/bone/wrong-samples.txt:tensor(14117),17,20
+./pretrain_eval/ntu120/xset/bone/wrong-samples.txt:tensor(20411),38,39
+./pretrain_eval/ntu120/xset/bone/wrong-samples.txt:tensor(24113),90,33
+./pretrain_eval/ntu120/xset/bone/wrong-samples.txt:tensor(24115),78,35
+./pretrain_eval/ntu120/xset/bone/wrong-samples.txt:tensor(24118),39,38
+./pretrain_eval/ntu120/xset/bone/wrong-samples.txt:tensor(34118),71,76
+./pretrain_eval/ntu120/xset/bone/wrong-samples.txt:tensor(34411),74,72
+./pretrain_eval/ntu120/xset/bone/wrong-samples.txt:tensor(37411),73,83
+./pretrain_eval/ntu120/xset/bone/wrong-samples.txt:tensor(41117),93,76
+./pretrain_eval/ntu120/xset/bone/wrong-samples.txt:tensor(41130),88,89
+./pretrain_eval/ntu120/xset/bone/wrong-samples.txt:tensor(41145),78,104
+./pretrain_eval/ntu120/xset/bone/wrong-samples.txt:tensor(41147),108,106
+./pretrain_eval/ntu120/xset/bone/wrong-samples.txt:tensor(41165),93,64
+./pretrain_eval/ntu120/xset/bone/wrong-samples.txt:tensor(41173),75,72
+./pretrain_eval/ntu120/xset/bone/wrong-samples.txt:tensor(41177),68,76
+./pretrain_eval/ntu120/xset/bone/wrong-samples.txt:tensor(42411),56,110
+./pretrain_eval/ntu120/xset/bone/wrong-samples.txt:tensor(44111),11,72
+./pretrain_eval/ntu120/xset/bone/wrong-samples.txt:tensor(44113),28,74
+./pretrain_eval/ntu120/xset/bone/wrong-samples.txt:tensor(52411),68,70
+./pretrain_eval/ntu120/xset/bone/wrong-samples.txt:tensor(53411),73,78
+./pretrain_eval/ntu120/xset/bone/wrong-samples.txt:tensor(58411),62,61
+./pretrain_eval/ntu120/xsub/joint/wrong-samples.txt:tensor(7411),32,10
+./pretrain_eval/ntu120/xsub/joint/wrong-samples.txt:tensor(14114),48,21
+./pretrain_eval/ntu120/xsub/joint/wrong-samples.txt:tensor(14116),101,23
+./pretrain_eval/ntu120/xsub/joint/wrong-samples.txt:tensor(28411),45,86
+./pretrain_eval/ntu120/xsub/joint/wrong-samples.txt:tensor(34110),88,90
+./pretrain_eval/ntu120/xsub/joint/wrong-samples.txt:tensor(34112),2,92
+./pretrain_eval/ntu120/xsub/joint/wrong-samples.txt:tensor(40411),80,87
+./pretrain_eval/ntu120/xsub/joint/wrong-samples.txt:tensor(41110),68,70
+./pretrain_eval/ntu120/xsub/joint/wrong-samples.txt:tensor(41112),74,72
+./pretrain_eval/ntu120/xsub/joint/wrong-samples.txt:tensor(41128),89,88
+./pretrain_eval/ntu120/xsub/joint/wrong-samples.txt:tensor(41149),114,109
+./pretrain_eval/ntu120/xsub/joint/wrong-samples.txt:tensor(41160),84,60
+./pretrain_eval/ntu120/xsub/joint/wrong-samples.txt:tensor(41170),68,70
+./pretrain_eval/ntu120/xsub/joint/wrong-samples.txt:tensor(41172),73,72
+./pretrain_eval/ntu120/xsub/joint/wrong-samples.txt:tensor(41173),83,73
+./pretrain_eval/ntu120/xsub/joint/wrong-samples.txt:tensor(41191),79,91
+./pretrain_eval/ntu120/xsub/joint/wrong-samples.txt:tensor(44112),83,75
+./pretrain_eval/ntu120/xsub/joint/wrong-samples.txt:tensor(44118),73,81
+./pretrain_eval/ntu120/xsub/joint/wrong-samples.txt:tensor(44411),73,74
+./pretrain_eval/ntu120/xsub/bone/wrong-samples.txt:tensor(7411),72,10
+./pretrain_eval/ntu120/xsub/bone/wrong-samples.txt:tensor(14114),48,21
+./pretrain_eval/ntu120/xsub/bone/wrong-samples.txt:tensor(19411),116,114
+./pretrain_eval/ntu120/xsub/bone/wrong-samples.txt:tensor(34110),88,90
+./pretrain_eval/ntu120/xsub/bone/wrong-samples.txt:tensor(41100),36,60
+./pretrain_eval/ntu120/xsub/bone/wrong-samples.txt:tensor(41106),104,66
+./pretrain_eval/ntu120/xsub/bone/wrong-samples.txt:tensor(41112),75,72
+./pretrain_eval/ntu120/xsub/bone/wrong-samples.txt:tensor(41128),89,88
+./pretrain_eval/ntu120/xsub/bone/wrong-samples.txt:tensor(41144),40,104
+./pretrain_eval/ntu120/xsub/bone/wrong-samples.txt:tensor(41160),84,60
+./pretrain_eval/ntu120/xsub/bone/wrong-samples.txt:tensor(41161),84,61
+./pretrain_eval/ntu120/xsub/bone/wrong-samples.txt:tensor(41171),68,71
+./pretrain_eval/ntu120/xsub/bone/wrong-samples.txt:tensor(41172),75,72
+./pretrain_eval/ntu120/xsub/bone/wrong-samples.txt:tensor(41173),85,73
+./pretrain_eval/ntu120/xsub/bone/wrong-samples.txt:tensor(41175),11,75
+./pretrain_eval/ntu120/xsub/bone/wrong-samples.txt:tensor(41181),10,81
+./pretrain_eval/ntu120/xsub/bone/wrong-samples.txt:tensor(41183),73,83
+./pretrain_eval/ntu120/xsub/bone/wrong-samples.txt:tensor(41191),100,91
+./pretrain_eval/ntu120/xsub/bone/wrong-samples.txt:tensor(43411),79,91
+./pretrain_eval/ntu120/xsub/bone/wrong-samples.txt:tensor(44111),28,74
+./pretrain_eval/ntu120/xsub/bone/wrong-samples.txt:tensor(44112),72,75
+./pretrain_eval/ntu120/xsub/bone/wrong-samples.txt:tensor(44411),72,74
+./pretrain_eval/newntu60xsub/log.txt:[ Wed May 26 00:23:19 2021 ] 	Mean training loss: 0.4118 (BS 16: 0.8236).
+./pretrain_eval/newntu60xsub/log.txt:[ Wed May 26 00:28:48 2021 ] 	Mean test loss of 592 batches: 0.7731824118795024.
+./pretrain_eval/newntu60xsub/log.txt:[ Wed May 26 02:45:53 2021 ] 	Mean training loss: 0.4110 (BS 16: 0.8220).
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-26-fwbz8-61152.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-3-fwbz8-7056.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-38-fwbz8-89376.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-11-fwbz8-25872.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-1-fwbz8-2352.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-50-fwbz8-117600.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-17-fwbz8-39984.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-43-fwbz8-101136.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-15-fwbz8-35280.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-19-fwbz8-44688.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-23-fwbz8-54096.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-47-fwbz8-110544.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-18-fwbz8-42336.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-36-fwbz8-84672.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-37-fwbz8-87024.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-7-fwbz8-16464.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-34-fwbz8-79968.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-48-fwbz8-112896.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-45-fwbz8-105840.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-12-fwbz8-28224.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-10-fwbz8-23520.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-16-fwbz8-37632.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-25-fwbz8-58800.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-29-fwbz8-68208.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-24-fwbz8-56448.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-5-fwbz8-11760.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-2-fwbz8-4704.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-40-fwbz8-94080.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-32-fwbz8-75264.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-33-fwbz8-77616.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-9-fwbz8-21168.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-27-fwbz8-63504.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-44-fwbz8-103488.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-49-fwbz8-115248.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-20-fwbz8-47040.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-28-fwbz8-65856.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-13-fwbz8-30576.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-35-fwbz8-82320.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-39-fwbz8-91728.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-21-fwbz8-49392.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-14-fwbz8-32928.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-30-fwbz8-70560.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-41-fwbz8-96432.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-22-fwbz8-51744.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-4-fwbz8-9408.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-6-fwbz8-14112.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-42-fwbz8-98784.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-8-fwbz8-18816.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-46-fwbz8-108192.pt matches
+Binary file ./pretrain_eval/newntu60xsub/checkpoints/checkpoint-31-fwbz8-72912.pt matches
+Binary file ./pretrain_eval/newntu60xsub/weights/weights-48-112896.pt matches
+Binary file ./pretrain_eval/newntu60xsub/weights/weights-3-7056.pt matches
+Binary file ./pretrain_eval/newntu60xsub/weights/weights-12-28224.pt matches
+Binary file ./pretrain_eval/newntu60xsub/weights/weights-10-23520.pt matches
+Binary file ./pretrain_eval/newntu60xsub/weights/weights-29-68208.pt matches
+Binary file ./pretrain_eval/newntu60xsub/weights/weights-34-79968.pt matches
+Binary file ./pretrain_eval/newntu60xsub/weights/weights-33-77616.pt matches
+Binary file ./pretrain_eval/newntu60xsub/weights/weights-22-51744.pt matches
+Binary file ./pretrain_eval/newntu60xsub/weights/weights-18-42336.pt matches
+Binary file ./pretrain_eval/newntu60xsub/weights/weights-27-63504.pt matches
+Binary file ./pretrain_eval/newntu60xsub/weights/weights-11-25872.pt matches
+Binary file ./pretrain_eval/newntu60xsub/weights/weights-6-14112.pt matches
+Binary file ./pretrain_eval/newntu60xsub/weights/weights-1-2352.pt matches
+Binary file ./pretrain_eval/newntu60xsub/weights/weights-45-105840.pt matches
+Binary file ./pretrain_eval/newntu60xsub/weights/weights-32-75264.pt matches
+Binary file ./pretrain_eval/newntu60xsub/weights/weights-5-11760.pt matches
+Binary file ./pretrain_eval/newntu60xsub/weights/weights-19-44688.pt matches
+Binary file ./pretrain_eval/newntu60xsub/weights/weights-24-56448.pt matches
+Binary file ./pretrain_eval/newntu60xsub/weights/weights-31-72912.pt matches
+Binary file ./pretrain_eval/newntu60xsub/weights/weights-8-18816.pt matches
+Binary file ./pretrain_eval/newntu60xsub/weights/weights-44-103488.pt matches
+Binary file ./pretrain_eval/newntu60xsub/weights/weights-9-21168.pt matches
+Binary file ./pretrain_eval/newntu60xsub/weights/weights-36-84672.pt matches
+Binary file ./pretrain_eval/newntu60xsub/weights/weights-38-89376.pt matches
+Binary file ./pretrain_eval/newntu60xsub/weights/weights-42-98784.pt matches
+Binary file ./pretrain_eval/newntu60xsub/weights/weights-7-16464.pt matches
+Binary file ./pretrain_eval/newntu60xsub/weights/weights-14-32928.pt matches
+Binary file ./pretrain_eval/newntu60xsub/weights/weights-26-61152.pt matches
+Binary file ./pretrain_eval/newntu60xsub/weights/weights-41-96432.pt matches
+Bin

@@ -175,31 +175,6 @@ class Model(nn.Module):
         out = self.fc(out)
         return out
 
-    def getencoding(self, x):
-        N, C, T, V, M = x.size()
-        #print("in size: ", x.size())
-        x = x.permute(0, 4, 3, 1, 2).contiguous().view(N, M * V * C, T)
-        x = self.data_bn(x)
-        x = x.view(N * M, V, C, T).permute(0,2,3,1).contiguous()
-
-        # Apply activation to the sum of the pathways
-        x = F.relu(self.sgcn1(x) + self.gcn3d1(x), inplace=True)
-        x = self.tcn1(x)
-
-        x = F.relu(self.sgcn2(x) + self.gcn3d2(x), inplace=True)
-        x = self.tcn2(x)
-
-        x = F.relu(self.sgcn3(x) + self.gcn3d3(x), inplace=True)
-        x = self.tcn3(x)
-
-        out = x
-        out_channels = out.size(1)
-        out = out.view(N, M, out_channels, -1)
-        out = out.mean(3)   # Global Average Pooling (Spatial+Temporal)
-        out = out.mean(1)   # Average pool number of bodies in the sequence
-
-        #print("final shape: ", out.size())
-        return out
 
 if __name__ == "__main__":
     # For debugging purposes
@@ -218,11 +193,5 @@ if __name__ == "__main__":
     N, C, T, V, M = 6, 3, 50, 25, 2
     x = torch.randn(N,C,T,V,M)
     model.forward(x)
-    model.getencoding(x)
-    #1:  torch.Size([12, 384, 13, 25])
-    #2:  torch.Size([6, 2, 384, 325])
-    #3:  torch.Size([6, 2, 384])
-    #4:  torch.Size([6, 384]) 
-    #out3 shape [6*384=2304]  
 
     print('Model total # params:', count_params(model))

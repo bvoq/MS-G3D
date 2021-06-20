@@ -39,8 +39,6 @@ def read_skeleton_filter(file):
             for m in range(frame_info['numBody']):
                 body_info = {}
                 body_info_key = [
-                    'bodyID', 'clipedEdges', 'handLeftConfidence',
-                    'handLeftState', 'handRightConfidence', 'handRightState',
                     'isResticted', 'leanX', 'leanY', 'trackingState'
                 ]
                 body_info = {
@@ -59,8 +57,10 @@ def read_skeleton_filter(file):
                         k: float(v)
                         for k, v in zip(joint_info_key, f.readline().split())
                     }
+                    #print("sample joint info:", joint_info)
                     body_info['jointInfo'].append(joint_info)
                 frame_info['bodyInfo'].append(body_info)
+                print("sample body info:", body_info)
             skeleton_sequence['frameInfo'].append(frame_info)
 
     return skeleton_sequence

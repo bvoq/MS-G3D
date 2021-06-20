@@ -22,6 +22,7 @@ import apex
 
 from utils import count_params, import_class
 
+from cosinesim import cosinesim
 
 
 def init_seed(seed):
@@ -589,7 +590,7 @@ class Processor():
 
                     _, predict_label = torch.max(output.data, 1)
                     step += 1
-
+                    
                     if wrong_file is not None or result_file is not None:
                         predict = list(predict_label.cpu().numpy())
                         true = list(label.data.cpu().numpy())
@@ -623,6 +624,140 @@ class Processor():
 
         # Empty cache after evaluation
         torch.cuda.empty_cache()
+
+
+
+    def embed(self, epoch, save_score=False, loader_name=['test'], wrong_file=None, result_file=None):
+        # Skip evaluation if too early
+        if epoch + 1 < self.arg.eval_start:
+            return
+
+        if wrong_file is not None:
+            f_w = open(wrong_file, 'w')
+        if result_file is not None:
+            f_r = open(result_file, 'w')
+        with torch.no_grad():
+            vect = dict() # containing the embeddings for each sign
+            self.model = self.model.cuda(self.output_device)
+            self.model.eval()
+            self.print_log(f'Eval epoch: {epoch + 1}')
+            for ln in loader_name:
+                loss_values = []
+                score_batches = []
+                step = 0
+                process = tqdm(self.data_loader[ln], dynamic_ncols=True)
+                for batch_idx, (data, label, index) in enumerate(process):
+                    data = data.float().cuda(self.output_device)
+                    label = label.long().cuda(self.output_device)
+                    output = self.model(data)
+                    if isinstance(output, tuple):
+                        output, l1 = output
+                        l1 = l1.mean()
+                    else:
+                        l1 = 0
+                    loss = self.loss(output, label)
+                    score_batches.append(output.data.cpu().numpy())
+                    loss_values.append(loss.item())
+
+                    _, predict_label = torch.max(output.data, 1)
+                    step += 1
+
+                    # data = torch.cuda.HalfTensor(data)
+                    if self.arg.half:
+                        data = data.type(torch.cuda.HalfTensor)
+                    output_encodings = self.model.getencoding(data) # data.float16().cuda(self.output_device)) # getencoding(data)
+                    #print("encoding shape: ", output_encodings.shape)
+                    #print("encodings: ", output_encodings)
+
+                    if wrong_file is not None or result_file is not None:
+                        predict = list(predict_label.cpu().numpy())
+                        true = list(label.data.cpu().numpy())
+                        print("pred (",len(predict),"): ", predict)
+                        print("true (",len(true),"): ", true)
+                        print("encodings (", output_encodings.shape,"): ", output_encodings)
+                         
+                        for i, x in enumerate(predict):
+                            if predict[i] == true[i]:
+                                if not x in vect:
+                                    vect[x] = output_encodings[i]
+
+                            if result_file is not None:
+                                f_r.write(str(x) + ',' + str(true[i]) + '\n')
+                            if x != true[i] and wrong_file is not None:
+                                f_w.write(str(index[i]) + ',' + str(x) + ',' + str(true[i]) + '\n')
+
+            score = np.concatenate(score_batches)
+            loss = np.mean(loss_values)
+            accuracy = self.data_loader[ln].dataset.top_k(score, 1)
+            if accuracy > self.best_acc:
+                self.best_acc = accuracy
+                self.best_acc_epoch = epoch + 1
+
+            print('Accuracy: ', accuracy, ' model: ', self.arg.work_dir)
+            if self.arg.phase == 'train' and not self.arg.debug:
+                self.val_writer.add_scalar('loss', loss, self.global_step)
+                self.val_writer.add_scalar('loss_l1', l1, self.global_step)
+                self.val_writer.add_scalar('acc', accuracy, self.global_step)
+
+            score_dict = dict(zip(self.data_loader[ln].dataset.sample_name, score))
+            self.print_log(f'\tMean {ln} loss of {len(self.data_loader[ln])} batches: {np.mean(loss_values)}.')
+            for k in self.arg.show_topk:
+                self.print_log(f'\tTop {k}: {100 * self.data_loader[ln].dataset.top_k(score, k):.2f}%')
+
+            if save_score:
+                with open('{}/epoch{}_{}_score.pkl'.format(self.arg.work_dir, epoch + 1, ln), 'wb') as f:
+                    pickle.dump(score_dict, f)
+
+        # Empty cache after evaluation
+        torch.cuda.empty_cache()
+
+        # storing the embeddings in a csv file
+        embeddings = open("embeddings.csv", "w")
+
+        print("length: ", len(vect), " ", len(vect[1]) )
+        gesture_matrix = torch.zeros([len(vect), len(vect[1])]) 
+        incr = 0
+        itoincr = dict()
+        for i in range(350):
+            if i in vect:
+                embeddings.write(str(i))
+                gesture_matrix[incr:] = vect[i]
+                itoincr[i] = incr
+                incr += 1
+                for q in vect[i]:
+                    embeddings.write(","+str(q.item()))
+                embeddings.write("\n")
+
+        embeddings.close()
+
+        print("gesture matrix")
+        print(gesture_matrix)
+        g2 = gesture_matrix.clone()
+        sm = cosinesim(gesture_matrix,g2)
+        print("symmetry matrix")
+        print(sm)
+        r_label = open("reverselabels.txt","r")
+        lines = r_label.readlines()
+        rlabel = dict()
+        for l in lines:
+            no_label = l.split(",")
+            no = int(no_label[0])
+            label = no_label[1]
+            rlabel[no] = label
+            print("no: ", no, " label: ", label)
+
+        f_cm = open("cosinesim.csv","w")
+        incr = 0
+        for i in range(350):
+            if i in vect:
+                f_cm.write(str(i))
+                for qi, q in enumerate(sm[incr,:]):
+                    f_cm.write(f"{rlabel[i]} ({i}) <-> {rlabel[itoincr[qi]]} = {str(q.item())}\n")
+                    #f_cm.write(","+str(q.item()))
+                incr += 1
+
+        f_cm.close()
+
 
     def start(self):
         torch.cuda.empty_cache()
@@ -659,6 +794,28 @@ class Processor():
             self.print_log(f'Weights: {self.arg.weights}')
 
             self.eval(
+                epoch=0,
+                save_score=self.arg.save_score,
+                loader_name=['test'],
+                wrong_file=wf,
+                result_file=rf
+            )
+
+            self.print_log('Done.\n')
+
+        elif self.arg.phase == 'embed':
+            if not self.arg.test_feeder_args['debug']:
+                wf = os.path.join(self.arg.work_dir, 'wrong-samples.txt')
+                rf = os.path.join(self.arg.work_dir, 'right-samples.txt')
+            else:
+                wf = rf = None
+            if self.arg.weights is None:
+                raise ValueError('Please appoint --weights.')
+
+            self.print_log(f'Model:   {self.arg.model}')
+            self.print_log(f'Weights: {self.arg.weights}')
+
+            self.embed(
                 epoch=0,
                 save_score=self.arg.save_score,
                 loader_name=['test'],

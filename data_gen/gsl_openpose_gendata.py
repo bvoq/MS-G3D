@@ -8,10 +8,10 @@ from tqdm import tqdm
 from torch.utils.data import Dataset
 
 
-num_joint = 18
-max_frame = 300
-num_person_out = 2
-num_person_in = 5
+num_joint = 67 #18
+max_frame = 144 #143 # 300
+num_person_out = 1 # 2
+num_person_in  = 1 # 5
 
 
 class Feeder_kinetics(Dataset):
@@ -70,6 +70,14 @@ class Feeder_kinetics(Dataset):
             label_info = json.load(f)
 
         sample_id = [name.split('.')[0] for name in self.sample_name]
+        #print("ok? ", sample_id[:20])
+        #print(label_info[sample_id[0]])
+        #print(label_info[sample_id[0]]['label_index'])
+        #print("issues? ", {k:label_info[k] for k in list(label_info)[:20]})
+        #print(len(label_info))
+        print("supposedly wrong label path: ", label_path)
+        labelarr = [label_info[sid]['label_index'] for sid in sample_id]
+        #print(labelarr)
         self.label = np.array([label_info[id]['label_index'] for id in sample_id])
         has_skeleton = np.array([label_info[id]['has_skeleton'] for id in sample_id])
 
@@ -148,15 +156,15 @@ def gendata(data_path, label_path,
     sample_name = feeder.sample_name
     sample_label = []
 
-    print("sample_name size: ", len(sample_name))
-    print("sample of sample: ", sample_name[:10])
+    #print("sample_name size: ", len(sample_name))
+    #print("sample of sample: ", sample_name[:10])
     fp = np.zeros((len(sample_name), 3, max_frame, num_joint, num_person_out), dtype=np.float32)
 
     for i, s in enumerate(tqdm(sample_name)):
         # s = file name, i = index
-        print(i, " ", s)
+        #print(i, " ", s)
         data, label = feeder[i]
-        print(data, " ", label)
+        #print(data, " ", label)
         fp[i, :, 0:data.shape[1], :, :] = data
         sample_label.append(label)
 
@@ -170,18 +178,18 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description='Kinetics-skeleton Data Converter.')
     parser.add_argument(
-        '--data_path', default='../data/kinetics_raw')
+        '--data_path', default='../data/gsl_openpose_raw')
     parser.add_argument(
-        '--out_folder', default='../data/kinetics')
+        '--out_folder', default='../data/gsl_openpose')
     arg = parser.parse_args()
 
     part = ['val', 'train']
     for p in part:
-        print('kinetics ', p)
+        print('gsl_openpose ', p)
         if not os.path.exists(arg.out_folder):
             os.makedirs(arg.out_folder)
-        data_path = '{}/kinetics_{}'.format(arg.data_path, p)
-        label_path = '{}/kinetics_{}_label.json'.format(arg.data_path, p)
+        data_path = '{}/gsl_openpose_{}'.format(arg.data_path, p)
+        label_path = '{}/gsl_openpose_{}_label.json'.format(arg.data_path, p)
         data_out_path = '{}/{}_data_joint.npy'.format(arg.out_folder, p)
         label_out_path = '{}/{}_label.pkl'.format(arg.out_folder, p)
 

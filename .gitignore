@@ -4,6 +4,9 @@
 runs/
 work_dir/
 
+pretrained-models/
+pretrain_eval/
+
 ### Python template
 # Byte-compiled / optimized / DLL files
 __pycache__/
