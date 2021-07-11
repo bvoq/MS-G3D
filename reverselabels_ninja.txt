@@ -1,0 +1,13 @@
+321,bird
+322,boar
+323,dog
+324,dragon
+325,horse
+326,kagebunshin
+327,monkey
+328,ox
+329,rabbit
+330,ram
+331,rat
+332,snake
+333,tiger

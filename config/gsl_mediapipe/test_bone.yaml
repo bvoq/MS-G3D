@@ -8,7 +8,7 @@ test_feeder_args:
 # model
 model: model.msg3d.Model
 model_args:
-  num_class: 321 #32
+  num_class: 350 #321 #32
   num_point: 75
   num_person: 1
   num_gcn_scales: 8

@@ -182,9 +182,13 @@ if __name__ == '__main__':
         '--data_path', default='../data/gsl_mediapipe_raw')
     parser.add_argument(
         '--out_folder', default='../data/gsl_mediapipe')
+    parser.add_argument(
+        '--embed', help='use additional data for which you want to generate embeddings (can have labels that are not present in the train/test set).') 
     arg = parser.parse_args()
 
     part = ['val', 'train']
+    if arg.embed:
+        part = ['val', 'train', 'embed']
     for p in part:
         print('gsl_mediapipe ', p)
         if not os.path.exists(arg.out_folder):

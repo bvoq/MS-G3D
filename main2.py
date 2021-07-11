@@ -402,6 +402,15 @@ class Processor():
             num_workers=self.arg.num_worker,
             drop_last=False,
             worker_init_fn=worker_seed_fn)
+        
+        if self.arg.phase == 'embed':
+            self.data_loader['embed'] = torch.utils.data.DataLoader( # same args as test
+                dataset=Feeder(**self.arg.test_feeder_args),
+                batch_size=self.arg.test_batch_size,
+                shuffle=False,
+                num_workers=self.arg.num_worker,
+                drop_last=False,
+                worker_init_fn=worker_seed_fn)
 
     def save_arg(self):
         # save arg
@@ -627,7 +636,7 @@ class Processor():
 
 
 
-    def embed(self, epoch, save_score=False, loader_name=['test'], wrong_file=None, result_file=None):
+    def embed(self, epoch, save_score=False, loader_name=['embed'], wrong_file=None, result_file=None):
         # Skip evaluation if too early
         if epoch + 1 < self.arg.eval_start:
             return
@@ -636,8 +645,11 @@ class Processor():
             f_w = open(wrong_file, 'w')
         if result_file is not None:
             f_r = open(result_file, 'w')
+        
+        vect = dict() # containing the embeddings for each sign
+        vectw = 0
+        totalvect = 0
         with torch.no_grad():
-            vect = dict() # containing the embeddings for each sign
             self.model = self.model.cuda(self.output_device)
             self.model.eval()
             self.print_log(f'Eval epoch: {epoch + 1}')
@@ -666,8 +678,8 @@ class Processor():
                     if self.arg.half:
                         data = data.type(torch.cuda.HalfTensor)
                     output_encodings = self.model.getencoding(data) # data.float16().cuda(self.output_device)) # getencoding(data)
-                    #print("encoding shape: ", output_encodings.shape)
-                    #print("encodings: ", output_encodings)
+                    print("encoding shape: ", output_encodings.shape)
+                    print("encodings: ", output_encodings)
 
                     if wrong_file is not None or result_file is not None:
                         predict = list(predict_label.cpu().numpy())
@@ -676,10 +688,15 @@ class Processor():
                         print("true (",len(true),"): ", true)
                         print("encodings (", output_encodings.shape,"): ", output_encodings)
                          
-                        for i, x in enumerate(predict):
-                            if predict[i] == true[i]:
-                                if not x in vect:
-                                    vect[x] = output_encodings[i]
+
+                        for i, x in enumerate(true):
+                          #if predict[i] == true[i]:
+                            vectw = len(output_encodings[i])
+                            totalvect += 1
+                            if not x in vect:
+                                vect[x] = [output_encodings[i]]
+                            else:
+                                vect[x].append(output_encodings[i])
 
                             if result_file is not None:
                                 f_r.write(str(x) + ',' + str(true[i]) + '\n')
@@ -711,24 +728,58 @@ class Processor():
         # Empty cache after evaluation
         torch.cuda.empty_cache()
 
+        r_label = open("reverselabels.txt","r")
+        lines = r_label.readlines()
+        rlabel = dict()
+        for l in lines:
+            no_label = l.split(",")
+            no = int(no_label[0].strip())
+            label = no_label[1].strip()
+            rlabel[no] = label
+            print("no: ", no, " label: ", label)
+
         # storing the embeddings in a csv file
         embeddings = open("embeddings.csv", "w")
+        embeddings_all = open("embeddings_all.csv", "w")
+        metadata = open("embeddings_labels.csv", "w")
+        metadata_all = open("embeddings_labels_all.csv", "w")
 
-        print("length: ", len(vect), " ", len(vect[1]) )
-        gesture_matrix = torch.zeros([len(vect), len(vect[1])]) 
+        print("length: ", totalvect, " ", vectw )
+        gesture_matrix = torch.zeros([len(vect), vectw]) 
+        gesture_matrix_all = torch.zeros([totalvect, vectw]) 
         incr = 0
-        itoincr = dict()
+        totincr = 0
+        incrtoi = dict()
         for i in range(350):
             if i in vect:
-                embeddings.write(str(i))
-                gesture_matrix[incr:] = vect[i]
-                itoincr[i] = incr
+                metadata.write(rlabel[i] + "\n")
+                #embeddings.write(rlabel[i])
+
+                #cpu = torch.device()
+                avgvect = torch.zeros(len(vect[i][0])).cuda(self.output_device)
+                sc = torch.tensor(1./len(vect[i])).cuda(self.output_device)
+                for v in vect[i]:
+                    avgvect += v * sc
+                    metadata_all.write(rlabel[i]+"\n")
+                    gesture_matrix_all[totincr:] = v
+                    totincr += 1
+
+                    for qi, q in enumerate(v):
+                        embeddings_all.write(("" if qi == 0 else "\t")+str(q.item()))
+                    embeddings_all.write("\n")
+
+                #gesture_matrix[incr:] = vect[i][0]
+                gesture_matrix[incr:] = avgvect
+                incrtoi[incr] = i
                 incr += 1
-                for q in vect[i]:
-                    embeddings.write(","+str(q.item()))
+                for qi, q in enumerate(avgvect):
+                    embeddings.write(("" if qi == 0 else "\t")+str(q.item()))
                 embeddings.write("\n")
 
+        metadata.close()
+        metadata_all.close()
         embeddings.close()
+        embeddings_all.close()
 
         print("gesture matrix")
         print(gesture_matrix)
@@ -736,25 +787,22 @@ class Processor():
         sm = cosinesim(gesture_matrix,g2)
         print("symmetry matrix")
         print(sm)
-        r_label = open("reverselabels.txt","r")
-        lines = r_label.readlines()
-        rlabel = dict()
-        for l in lines:
-            no_label = l.split(",")
-            no = int(no_label[0])
-            label = no_label[1]
-            rlabel[no] = label
-            print("no: ", no, " label: ", label)
 
         f_cm = open("cosinesim.csv","w")
         incr = 0
+        thelist = []
         for i in range(350):
             if i in vect:
                 f_cm.write(str(i))
                 for qi, q in enumerate(sm[incr,:]):
-                    f_cm.write(f"{rlabel[i]} ({i}) <-> {rlabel[itoincr[qi]]} = {str(q.item())}\n")
-                    #f_cm.write(","+str(q.item()))
+                    if i != incrtoi[qi]:
+                        thelist.append((q.item(), rlabel[i], rlabel[incrtoi[qi]]))
+                        # f_cm.write(f"{rlabel[i]} ({i}) <->  {rlabel[incrtoi[qi]]} = {str(q.item())}\n")
                 incr += 1
+
+        thelist.sort(reverse=True)
+        for (conf, l, r) in thelist:
+            f_cm.write(f"{conf},{l},{r}\n")
 
         f_cm.close()
 
@@ -818,7 +866,7 @@ class Processor():
             self.embed(
                 epoch=0,
                 save_score=self.arg.save_score,
-                loader_name=['test'],
+                loader_name=['embed'],
                 wrong_file=wf,
                 result_file=rf
             )
