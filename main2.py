@@ -741,6 +741,7 @@ class Processor():
         # storing the embeddings in a csv file
         embeddings = open("embeddings.csv", "w")
         embeddings_all = open("embeddings_all.csv", "w")
+        embeddings_libsvm_all = open("embeddings_libsvm.data","w")
         metadata = open("embeddings_labels.csv", "w")
         metadata_all = open("embeddings_labels_all.csv", "w")
 
@@ -763,10 +764,13 @@ class Processor():
                     metadata_all.write(rlabel[i]+"\n")
                     gesture_matrix_all[totincr:] = v
                     totincr += 1
-
+                    
+                    embeddings_libsvm_all.write("+"+str(incr+1)+" ")
                     for qi, q in enumerate(v):
                         embeddings_all.write(("" if qi == 0 else "\t")+str(q.item()))
+                        embeddings_libsvm_all.write(str(qi+1)+":"+str(q.item())+" ")
                     embeddings_all.write("\n")
+                    embeddings_libsvm_all.write("\n")
 
                 #gesture_matrix[incr:] = vect[i][0]
                 gesture_matrix[incr:] = avgvect
