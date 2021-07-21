@@ -765,7 +765,7 @@ class Processor():
                     gesture_matrix_all[totincr:] = v
                     totincr += 1
                     
-                    embeddings_libsvm_all.write("+"+str(321+incr+1)+" ")
+                    embeddings_libsvm_all.write("+"+str(incr+1)+" ")
                     for qi, q in enumerate(v):
                         embeddings_all.write(("" if qi == 0 else "\t")+str(q.item()))
                         embeddings_libsvm_all.write(str(qi+1)+":"+str(q.item())+" ")
