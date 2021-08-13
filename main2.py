@@ -217,6 +217,92 @@ def get_parser():
 
     return parser
 
+# TODO: Make sure the background shape is correct here:
+backgroundid = 334
+outputdim = 350
+
+
+
+from torch import Tensor
+from typing import Callable, Optional
+
+class CrossEntropyWithBackgroundLoss(torch.nn.CrossEntropyLoss):
+    __constants__ = ['ignore_index', 'reduction']
+    ignore_index: int
+
+    def __init__(self, weight: Optional[Tensor] = None, size_average=None, ignore_index: int = -100,
+        reduce=None, reduction: str = 'mean') -> None:
+
+        self.ignore_index = ignore_index
+        super(nn.CrossEntropyLoss, self).__init__(weight, size_average, reduce, reduction)
+
+
+
+    # TODO: Create example loss test case and see if the function correctly satisfies it and see if .backward() works.
+    def forward(self, input: Tensor, target: Tensor) -> Tensor:
+        #expected = super().forward(input, target)
+        #return super(nn.CrossEntropyLoss, self).forward(input, target)
+        #with torch.no_grad():
+        #    expected = nn.functional.cross_entropy(input, target, weight=self.weight,
+        #        ignore_index=self.ignore_index, reduction=self.reduction)
+        #
+        full_target = [i for i in range(0,backgroundid)]
+        tft = torch.tensor(full_target, requires_grad=False, dtype=torch.long).cuda()
+        #assert(outputdim == input.shape[1])
+        #batch_size = 4
+        batch_size = input.shape[0]
+        #assert(batch_size == 8)
+
+        loss = 0
+        #for tidx, tid in enumerate(target):
+        #    # TODO: I BELIEVE HAS TO BE DTYPE FLOAT16 DUE TO APEX
+        #    #self.filledtensor = input[tidx].unsqueeze(0)
+        #    filledtensor = torch.empty(1, outputdim, requires_grad=True, dtype=torch.float16).cuda()
+        #    #with torch.no_grad():
+        #    filledtensor[0,:] = input[tidx]                                                                                                                         
+        #    #self.filledtensor = torch.full([1,outputdim], input[tidx])
+        #    #self.singletarget = torch.empty(1, dtype=torch.int).cuda()
+        #    #with torch.no_grad():
+        #    #    self.singletarget[0] = target[tidx]
+        #    #self.singletarget = target[tidx].unsqueeze(0)
+
+        #    loss += 1.0/batch_size * nn.functional.cross_entropy(input[tidx].unsqueeze(0), target[tidx].unsqueeze(0), weight=self.weight,
+        #        ignore_index=self.ignore_index, reduction=self.reduction)
+        #    #del self.filledtensor
+        #    #del self.singletarget
+
+        #print(expected, " ?= ", loss)
+
+        for tidx, tid in enumerate(target):
+            if tid == backgroundid:
+                #filledtensor = input[tidx].repeat(backgroundid,1)
+                #print("shape: ", filledtensor.shape)
+                #torch.empty(backgroundid, outputdim, requires_grad=True, dtype=torch.float16).cuda()
+                #with torch.no_grad():
+                #    for i in range(0, backgroundid):
+                #        filledtensor[i,:] = input[tidx]
+                
+                # this calls a C optimised cross entropy but with BS=8 it shouldn't matter too much
+                loss += 1.0/batch_size * 1.0/backgroundid * nn.functional.cross_entropy(input[tidx].repeat(backgroundid,1), tft, weight=self.weight,
+                    ignore_index=self.ignore_index, reduction=self.reduction)
+            else: # normal case
+                #filledtensor = torch.empty(1, outputdim, requires_grad=True)#.cuda()
+                #with torch.no_grad():
+                #    filledtensor[0,:] = input[tidx]
+
+                #singletarget = torch.empty(1, dtype=torch.long)#.cuda()
+                #with torch.no_grad():
+                #    singletarget[0] = target[tidx]
+                loss += 1.0/batch_size * nn.functional.cross_entropy(input[tidx].unsqueeze(0), target[tidx].unsqueeze(0), weight=self.weight,
+                    ignore_index=self.ignore_index, reduction=self.reduction)
+
+               
+        return loss
+
+        #non baclground implementations
+        #return nn.functional.cross_entropy(input, target, weight=self.weight,
+        #    ignore_index=self.ignore_index, reduction=self.reduction)
+        #return super().forward(input, target)
 
 class Processor():
     """Processor for Skeleton-based Action Recgnition"""
@@ -290,7 +376,9 @@ class Processor():
         shutil.copy2(os.path.join('.', __file__), self.arg.work_dir)
 
         self.model = Model(**self.arg.model_args).cuda(output_device)
-        self.loss = nn.CrossEntropyLoss().cuda(output_device)
+        # see how good it is by simply measuring bg as it's own class
+        # self.loss = nn.CrossEntropyLoss().cuda(output_device)
+        self.loss = CrossEntropyWithBackgroundLoss().cuda(output_device) # TODO: Add custom loss function here!!
         self.print_log(f'Model total number of params: {count_params(self.model)}')
 
         if self.arg.weights:
@@ -530,6 +618,8 @@ class Processor():
                 self.train_writer.add_scalar('acc', acc, self.global_step)
                 self.train_writer.add_scalar('loss', loss.item() * splits, self.global_step)
                 self.train_writer.add_scalar('loss_l1', l1, self.global_step)
+                #del loss
+                #del output
 
             #####################################
 
@@ -909,4 +999,20 @@ def main():
 
 
 if __name__ == '__main__':
+
+    #loss = CrossEntropyWithBackgroundLoss()
+    ## batch size 2 example
+    #target = torch.tensor( [2, 3] )
+    #train = torch.tensor( [[0, 0, 0, 1],[0, 0, 0, 1]] , dtype=torch.float)
+
+    #outputdim=4
+    #l = loss.forward(train, target)
+
+    #print("l: ", l)
+    
+    #softmax([0, 0, 0, 1]) = [0.1749, 0.1749, 0.1749, 0.4754]
+    #-log(0.4754) = 0.7437
+    #-log(0.1749) = 1.7435
+    #added: 2.4872/2=1.2437, checks out
+
     main()
