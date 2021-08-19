@@ -220,6 +220,7 @@ def get_parser():
 # TODO: Make sure the background shape is correct here:
 backgroundid = 334
 outputdim = 350
+embeddingtype = "forward" # either embed or forward
 
 
 
@@ -377,8 +378,8 @@ class Processor():
 
         self.model = Model(**self.arg.model_args).cuda(output_device)
         # see how good it is by simply measuring bg as it's own class
-        # self.loss = nn.CrossEntropyLoss().cuda(output_device)
-        self.loss = CrossEntropyWithBackgroundLoss().cuda(output_device) # TODO: Add custom loss function here!!
+        self.loss = nn.CrossEntropyLoss().cuda(output_device)
+        # self.loss = CrossEntropyWithBackgroundLoss().cuda(output_device) # TODO: Add custom loss function here!!
         self.print_log(f'Model total number of params: {count_params(self.model)}')
 
         if self.arg.weights:
@@ -495,7 +496,7 @@ class Processor():
             self.data_loader['embed'] = torch.utils.data.DataLoader( # same args as test
                 dataset=Feeder(**self.arg.test_feeder_args),
                 batch_size=self.arg.test_batch_size,
-                shuffle=False,
+                shuffle=False, # important, you want the same order!
                 num_workers=self.arg.num_worker,
                 drop_last=False,
                 worker_init_fn=worker_seed_fn)
@@ -767,7 +768,10 @@ class Processor():
                     # data = torch.cuda.HalfTensor(data)
                     if self.arg.half:
                         data = data.type(torch.cuda.HalfTensor)
-                    output_encodings = self.model.getencoding(data) # data.float16().cuda(self.output_device)) # getencoding(data)
+                    if embeddingtype == "embed":
+                        output_encodings = self.model.getencoding(data) # data.float16().cuda(self.output_device)) # getencoding(data)
+                    else:
+                        output_encodings = self.model.forward(data) # data.float16().cuda(self.output_device)) # getencoding(data)
                     print("encoding shape: ", output_encodings.shape)
                     print("encodings: ", output_encodings)
 
@@ -829,11 +833,11 @@ class Processor():
             print("no: ", no, " label: ", label)
 
         # storing the embeddings in a csv file
-        embeddings = open("embeddings.csv", "w")
-        embeddings_all = open("embeddings_all.csv", "w")
-        embeddings_libsvm_all = open("embeddings_libsvm.data","w")
-        metadata = open("embeddings_labels.csv", "w")
-        metadata_all = open("embeddings_labels_all.csv", "w")
+        embeddings = open("forward.csv" if embeddingtype == "forward" else "embeddings.csv" , "w")
+        embeddings_all = open("forward_all.csv" if embeddingtype == "forward" else "embeddings_all.csv", "w")
+        embeddings_libsvm_all = open("forward_libsvm.data" if embeddingtype == "forward" else "embeddings_libsvm.data","w")
+        metadata = open("forward_labels.csv" if embeddingtype == "forward" else "embeddings_labels.csv", "w")
+        metadata_all = open("forward_labels_all.csv" if embeddingtype == "forward" else "embeddings_labels_all.csv", "w")
 
         print("length: ", totalvect, " ", vectw )
         gesture_matrix = torch.zeros([len(vect), vectw]) 
@@ -841,7 +845,7 @@ class Processor():
         incr = 0
         totincr = 0
         incrtoi = dict()
-        for i in range(350):
+        for i in range(outputdim):
             if i in vect:
                 metadata.write(rlabel[i] + "\n")
                 #embeddings.write(rlabel[i])
@@ -882,10 +886,10 @@ class Processor():
         print("symmetry matrix")
         print(sm)
 
-        f_cm = open("cosinesim.csv","w")
+        f_cm = open("forward_cosinesim.csv" if embeddingtype == "forward" else "embed_cosinesim.csv","w")
         incr = 0
         thelist = []
-        for i in range(350):
+        for i in range(outputdim):
             if i in vect:
                 f_cm.write(str(i))
                 for qi, q in enumerate(sm[incr,:]):
