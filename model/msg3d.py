@@ -149,6 +149,7 @@ class Model(nn.Module):
         self.tcn3 = MS_TCN(c3, c3)
 
         self.fc = nn.Linear(c3, num_class)
+        self.inclsoftmax = nn.Softmax(dim=1)
 
     def forward(self, x):
         N, C, T, V, M = x.size()
@@ -200,6 +201,33 @@ class Model(nn.Module):
 
         #print("final shape: ", out.size())
         return out
+
+    def getsoftmax(self, x):
+        N, C, T, V, M = x.size()
+        x = x.permute(0, 4, 3, 1, 2).contiguous().view(N, M * V * C, T)
+        x = self.data_bn(x)
+        x = x.view(N * M, V, C, T).permute(0,2,3,1).contiguous()
+
+        # Apply activation to the sum of the pathways
+        x = F.relu(self.sgcn1(x) + self.gcn3d1(x), inplace=True)
+        x = self.tcn1(x)
+
+        x = F.relu(self.sgcn2(x) + self.gcn3d2(x), inplace=True)
+        x = self.tcn2(x)
+
+        x = F.relu(self.sgcn3(x) + self.gcn3d3(x), inplace=True)
+        x = self.tcn3(x)
+
+        out = x
+        out_channels = out.size(1)
+        out = out.view(N, M, out_channels, -1)
+        out = out.mean(3)   # Global Average Pooling (Spatial+Temporal)
+        out = out.mean(1)   # Average pool number of bodies in the sequence
+
+        out = self.fc(out)
+        out = self.inclsoftmax(out)
+        return out
+
 
 if __name__ == "__main__":
     # For debugging purposes
