@@ -1,0 +1,46 @@
+
+work_dir: ./work_dir/gsl_mediapipe/msg3d_joint
+
+# feeder
+feeder: feeders.feeder.Feeder
+train_feeder_args:
+  data_path: ./data/gsl_mediapipe/train_data_joint.npy
+  label_path: ./data/gsl_mediapipe/train_label.pkl
+  debug: False
+
+test_feeder_args:
+  data_path: ./data/gsl_mediapipe/val_data_joint.npy
+  label_path: ./data/gsl_mediapipe/val_label.pkl
+
+# model
+model: model.msg3d.Model
+model_args:
+  num_class: 350 #321
+  num_point: 75
+  num_person: 1
+  num_gcn_scales: 8
+  num_g3d_scales: 8
+  graph: graph.gsl_mediapipe.AdjMatrixGraph
+
+# optim
+# weight_decay: 0.0005
+weight_decay: 0.0003
+base_lr: 0.05
+# base_lr: 0.1
+step: [16,22,25]
+
+# training
+num_epoch: 30
+device: [0]
+# device: [0, 1, 2, 3]
+batch_size: 32
+#batch_size: 128
+forward_batch_size: 8
+#forward_batch_size: 64
+test_batch_size: 32
+#test_batch_size: 128
+nesterov: True
+
+
+
+
