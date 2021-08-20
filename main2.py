@@ -771,7 +771,8 @@ class Processor():
                     if embeddingtype == "embed":
                         output_encodings = self.model.getencoding(data) # data.float16().cuda(self.output_device)) # getencoding(data)
                     else:
-                        output_encodings = self.model.getsoftmax(data) # data.float16().cuda(self.output_device)) # getencoding(data)
+                        output_encodings = self.model.getsoftmax(data) # getsoftmax(data) # data.float16().cuda(self.output_device)) # getencoding(data)
+                    print("index: ", index, " batchindex: ", batch_idx)
                     print("encoding shape: ", output_encodings.shape)
                     print("encodings: ", output_encodings)
 
