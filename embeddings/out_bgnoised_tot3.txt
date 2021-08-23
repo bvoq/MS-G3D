@@ -1,0 +1,395 @@
+Accuracy = 0% (0/1) (classification)
+5627 [ 320 ] : plabel,pacc:  [329.0]   0.0
+Accuracy = 100% (1/1) (classification)
+5628 [ 320 ] : plabel,pacc:  [320.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5629 [ 320 ] : plabel,pacc:  [320.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5630 [ 320 ] : plabel,pacc:  [320.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5631 [ 320 ] : plabel,pacc:  [320.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5632 [ 320 ] : plabel,pacc:  [320.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5633 [ 320 ] : plabel,pacc:  [320.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5634 [ 320 ] : plabel,pacc:  [320.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5635 [ 320 ] : plabel,pacc:  [320.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5636 [ 320 ] : plabel,pacc:  [320.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5637 [ 320 ] : plabel,pacc:  [320.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5638 [ 320 ] : plabel,pacc:  [320.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5639 [ 320 ] : plabel,pacc:  [320.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5640 [ 320 ] : plabel,pacc:  [320.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5641 [ 320 ] : plabel,pacc:  [320.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5642 [ 320 ] : plabel,pacc:  [320.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5643 [ 320 ] : plabel,pacc:  [320.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5644 [ 321 ] : plabel,pacc:  [321.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5645 [ 321 ] : plabel,pacc:  [321.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5646 [ 321 ] : plabel,pacc:  [321.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5647 [ 321 ] : plabel,pacc:  [321.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5648 [ 321 ] : plabel,pacc:  [321.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5649 [ 321 ] : plabel,pacc:  [321.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5650 [ 321 ] : plabel,pacc:  [321.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5651 [ 321 ] : plabel,pacc:  [321.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5652 [ 321 ] : plabel,pacc:  [321.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5653 [ 321 ] : plabel,pacc:  [321.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5654 [ 321 ] : plabel,pacc:  [321.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5655 [ 321 ] : plabel,pacc:  [321.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5656 [ 321 ] : plabel,pacc:  [321.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5657 [ 322 ] : plabel,pacc:  [322.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5658 [ 322 ] : plabel,pacc:  [322.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5659 [ 322 ] : plabel,pacc:  [322.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5660 [ 322 ] : plabel,pacc:  [322.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5661 [ 322 ] : plabel,pacc:  [322.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5662 [ 322 ] : plabel,pacc:  [322.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5663 [ 322 ] : plabel,pacc:  [322.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5664 [ 322 ] : plabel,pacc:  [322.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5665 [ 322 ] : plabel,pacc:  [322.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5666 [ 322 ] : plabel,pacc:  [322.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5667 [ 322 ] : plabel,pacc:  [322.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5668 [ 322 ] : plabel,pacc:  [322.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5669 [ 322 ] : plabel,pacc:  [322.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5670 [ 323 ] : plabel,pacc:  [323.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5671 [ 323 ] : plabel,pacc:  [323.0]   100.0
+Accuracy = 0% (0/1) (classification)
+5672 [ 323 ] : plabel,pacc:  [330.0]   0.0
+Accuracy = 100% (1/1) (classification)
+5673 [ 323 ] : plabel,pacc:  [323.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5674 [ 323 ] : plabel,pacc:  [323.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5675 [ 323 ] : plabel,pacc:  [323.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5676 [ 323 ] : plabel,pacc:  [323.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5677 [ 323 ] : plabel,pacc:  [323.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5678 [ 323 ] : plabel,pacc:  [323.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5679 [ 323 ] : plabel,pacc:  [323.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5680 [ 323 ] : plabel,pacc:  [323.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5681 [ 323 ] : plabel,pacc:  [323.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5682 [ 323 ] : plabel,pacc:  [323.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5683 [ 323 ] : plabel,pacc:  [323.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5684 [ 323 ] : plabel,pacc:  [323.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5685 [ 323 ] : plabel,pacc:  [323.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5686 [ 324 ] : plabel,pacc:  [324.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5687 [ 324 ] : plabel,pacc:  [324.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5688 [ 324 ] : plabel,pacc:  [324.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5689 [ 324 ] : plabel,pacc:  [324.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5690 [ 324 ] : plabel,pacc:  [324.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5691 [ 324 ] : plabel,pacc:  [324.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5692 [ 324 ] : plabel,pacc:  [324.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5693 [ 324 ] : plabel,pacc:  [324.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5694 [ 324 ] : plabel,pacc:  [324.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5695 [ 324 ] : plabel,pacc:  [324.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5696 [ 324 ] : plabel,pacc:  [324.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5697 [ 324 ] : plabel,pacc:  [324.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5698 [ 324 ] : plabel,pacc:  [324.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5699 [ 324 ] : plabel,pacc:  [324.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5700 [ 324 ] : plabel,pacc:  [324.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5701 [ 325 ] : plabel,pacc:  [325.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5702 [ 325 ] : plabel,pacc:  [325.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5703 [ 325 ] : plabel,pacc:  [325.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5704 [ 325 ] : plabel,pacc:  [325.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5705 [ 325 ] : plabel,pacc:  [325.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5706 [ 325 ] : plabel,pacc:  [325.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5707 [ 325 ] : plabel,pacc:  [325.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5708 [ 325 ] : plabel,pacc:  [325.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5709 [ 325 ] : plabel,pacc:  [325.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5710 [ 325 ] : plabel,pacc:  [325.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5711 [ 325 ] : plabel,pacc:  [325.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5712 [ 325 ] : plabel,pacc:  [325.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5713 [ 325 ] : plabel,pacc:  [325.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5714 [ 325 ] : plabel,pacc:  [325.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5715 [ 325 ] : plabel,pacc:  [325.0]   100.0
+Accuracy = 0% (0/1) (classification)
+5716 [ 326 ] : plabel,pacc:  [327.0]   0.0
+Accuracy = 100% (1/1) (classification)
+5717 [ 326 ] : plabel,pacc:  [326.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5718 [ 326 ] : plabel,pacc:  [326.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5719 [ 326 ] : plabel,pacc:  [326.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5720 [ 326 ] : plabel,pacc:  [326.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5721 [ 326 ] : plabel,pacc:  [326.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5722 [ 326 ] : plabel,pacc:  [326.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5723 [ 326 ] : plabel,pacc:  [326.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5724 [ 326 ] : plabel,pacc:  [326.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5725 [ 326 ] : plabel,pacc:  [326.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5726 [ 326 ] : plabel,pacc:  [326.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5727 [ 326 ] : plabel,pacc:  [326.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5728 [ 326 ] : plabel,pacc:  [326.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5729 [ 326 ] : plabel,pacc:  [326.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5730 [ 326 ] : plabel,pacc:  [326.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5731 [ 327 ] : plabel,pacc:  [327.0]   100.0
+Accuracy = 0% (0/1) (classification)
+5732 [ 327 ] : plabel,pacc:  [331.0]   0.0
+Accuracy = 100% (1/1) (classification)
+5733 [ 327 ] : plabel,pacc:  [327.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5734 [ 327 ] : plabel,pacc:  [327.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5735 [ 327 ] : plabel,pacc:  [327.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5736 [ 327 ] : plabel,pacc:  [327.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5737 [ 327 ] : plabel,pacc:  [327.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5738 [ 327 ] : plabel,pacc:  [327.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5739 [ 327 ] : plabel,pacc:  [327.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5740 [ 327 ] : plabel,pacc:  [327.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5741 [ 327 ] : plabel,pacc:  [327.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5742 [ 327 ] : plabel,pacc:  [327.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5743 [ 327 ] : plabel,pacc:  [327.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5744 [ 327 ] : plabel,pacc:  [327.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5745 [ 328 ] : plabel,pacc:  [328.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5746 [ 328 ] : plabel,pacc:  [328.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5747 [ 328 ] : plabel,pacc:  [328.0]   100.0
+Accuracy = 0% (0/1) (classification)
+5748 [ 328 ] : plabel,pacc:  [331.0]   0.0
+Accuracy = 100% (1/1) (classification)
+5749 [ 328 ] : plabel,pacc:  [328.0]   100.0
+Accuracy = 0% (0/1) (classification)
+5750 [ 328 ] : plabel,pacc:  [326.0]   0.0
+Accuracy = 100% (1/1) (classification)
+5751 [ 328 ] : plabel,pacc:  [328.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5752 [ 328 ] : plabel,pacc:  [328.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5753 [ 328 ] : plabel,pacc:  [328.0]   100.0
+Accuracy = 0% (0/1) (classification)
+5754 [ 328 ] : plabel,pacc:  [323.0]   0.0
+Accuracy = 0% (0/1) (classification)
+5755 [ 328 ] : plabel,pacc:  [322.0]   0.0
+Accuracy = 100% (1/1) (classification)
+5756 [ 328 ] : plabel,pacc:  [328.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5757 [ 328 ] : plabel,pacc:  [328.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5758 [ 328 ] : plabel,pacc:  [328.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5759 [ 329 ] : plabel,pacc:  [329.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5760 [ 329 ] : plabel,pacc:  [329.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5761 [ 329 ] : plabel,pacc:  [329.0]   100.0
+Accuracy = 0% (0/1) (classification)
+5762 [ 329 ] : plabel,pacc:  [332.0]   0.0
+Accuracy = 100% (1/1) (classification)
+5763 [ 329 ] : plabel,pacc:  [329.0]   100.0
+Accuracy = 0% (0/1) (classification)
+5764 [ 329 ] : plabel,pacc:  [332.0]   0.0
+Accuracy = 100% (1/1) (classification)
+5765 [ 329 ] : plabel,pacc:  [329.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5766 [ 329 ] : plabel,pacc:  [329.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5767 [ 329 ] : plabel,pacc:  [329.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5768 [ 329 ] : plabel,pacc:  [329.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5769 [ 329 ] : plabel,pacc:  [329.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5770 [ 329 ] : plabel,pacc:  [329.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5771 [ 329 ] : plabel,pacc:  [329.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5772 [ 329 ] : plabel,pacc:  [329.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5773 [ 329 ] : plabel,pacc:  [329.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5774 [ 330 ] : plabel,pacc:  [330.0]   100.0
+Accuracy = 0% (0/1) (classification)
+5775 [ 330 ] : plabel,pacc:  [331.0]   0.0
+Accuracy = 100% (1/1) (classification)
+5776 [ 330 ] : plabel,pacc:  [330.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5777 [ 330 ] : plabel,pacc:  [330.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5778 [ 330 ] : plabel,pacc:  [330.0]   100.0
+Accuracy = 0% (0/1) (classification)
+5779 [ 330 ] : plabel,pacc:  [323.0]   0.0
+Accuracy = 100% (1/1) (classification)
+5780 [ 330 ] : plabel,pacc:  [330.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5781 [ 330 ] : plabel,pacc:  [330.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5782 [ 330 ] : plabel,pacc:  [330.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5783 [ 330 ] : plabel,pacc:  [330.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5784 [ 330 ] : plabel,pacc:  [330.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5785 [ 330 ] : plabel,pacc:  [330.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5786 [ 330 ] : plabel,pacc:  [330.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5787 [ 330 ] : plabel,pacc:  [330.0]   100.0
+Accuracy = 0% (0/1) (classification)
+5788 [ 330 ] : plabel,pacc:  [331.0]   0.0
+Accuracy = 100% (1/1) (classification)
+5789 [ 331 ] : plabel,pacc:  [331.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5790 [ 331 ] : plabel,pacc:  [331.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5791 [ 331 ] : plabel,pacc:  [331.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5792 [ 331 ] : plabel,pacc:  [331.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5793 [ 331 ] : plabel,pacc:  [331.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5794 [ 331 ] : plabel,pacc:  [331.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5795 [ 331 ] : plabel,pacc:  [331.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5796 [ 331 ] : plabel,pacc:  [331.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5797 [ 331 ] : plabel,pacc:  [331.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5798 [ 331 ] : plabel,pacc:  [331.0]   100.0
+Accuracy = 0% (0/1) (classification)
+5799 [ 331 ] : plabel,pacc:  [327.0]   0.0
+Accuracy = 100% (1/1) (classification)
+5800 [ 331 ] : plabel,pacc:  [331.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5801 [ 331 ] : plabel,pacc:  [331.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5802 [ 331 ] : plabel,pacc:  [331.0]   100.0
+Accuracy = 0% (0/1) (classification)
+5803 [ 332 ] : plabel,pacc:  [329.0]   0.0
+Accuracy = 100% (1/1) (classification)
+5804 [ 332 ] : plabel,pacc:  [332.0]   100.0
+Accuracy = 0% (0/1) (classification)
+5805 [ 332 ] : plabel,pacc:  [329.0]   0.0
+Accuracy = 100% (1/1) (classification)
+5806 [ 332 ] : plabel,pacc:  [332.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5807 [ 332 ] : plabel,pacc:  [332.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5808 [ 332 ] : plabel,pacc:  [332.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5809 [ 332 ] : plabel,pacc:  [332.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5810 [ 332 ] : plabel,pacc:  [332.0]   100.0
+Accuracy = 0% (0/1) (classification)
+5811 [ 332 ] : plabel,pacc:  [329.0]   0.0
+Accuracy = 100% (1/1) (classification)
+5812 [ 332 ] : plabel,pacc:  [332.0]   100.0
+Accuracy = 0% (0/1) (classification)
+5813 [ 332 ] : plabel,pacc:  [329.0]   0.0
+Accuracy = 100% (1/1) (classification)
+5814 [ 332 ] : plabel,pacc:  [332.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5815 [ 332 ] : plabel,pacc:  [332.0]   100.0
+Accuracy = 100% (1/1) (classification)
+5816 [ 332 ] : plabel,pacc:  [332.0]   100.0
+Final prediction accuracy: 172/190=0.9052631578947369
+320: 16/17=0.9411764705882353
+321: 13/13=1.0
+322: 13/13=1.0
+323: 15/16=0.9375
+324: 15/15=1.0
+325: 15/15=1.0
+326: 14/15=0.9333333333333333
+327: 13/14=0.9285714285714286
+328: 10/14=0.7142857142857143
+329: 13/15=0.8666666666666667
+330: 12/15=0.8
+331: 13/14=0.9285714285714286
+332: 10/14=0.7142857142857143
+Final prediction accuracy: 172/190=0.9052631578947369

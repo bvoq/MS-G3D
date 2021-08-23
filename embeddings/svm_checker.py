@@ -10,25 +10,47 @@ from libsvm.svmutil import *
 #print("acc,mse,scc: ",ACC, " ",MSE, " ",SCC)
 
 
+#start = 5634
+#end = 5824
 
-y, x = svm_read_problem('embeddings_untrained/embeddings_libsvm_mixed.data')
-start = 5634
-end = 5824
+# ignored ??? here i suppose
+#y, x = svm_read_problem('./embeddings_bgnoised_tot/embeddings_libsvm.data')
+y, x = svm_read_problem('./embeddings_bgnoised_tot/forward_libsvm.data')
+start = 5628-1
+end = 5818-1
+
+
+include_val = False
+
+#y, x = svm_read_problem('./embeddings_bgnoised/embeddings_libsvm.data')
+#start = 1-1
+#end = 191-1
+
+
+
 totcount = 0
 ccount = 0
 
-print(int(y[5823]))
+#print(int(y[5823]))
+print(type(y))
 ccount_label = dict()
 totcount_label = dict()
 for li in range(start, end):
     if li == end-1:
-        m = svm_train(y[:li], x[:li], '-c 4 -q')
+        if include_val:
+            m = svm_train(y[:li], x[:li], '-c 4 -q')
+        else:
+            m = svm_train(y[start:li], x[start:li], '-c 4 -q')
     else:
-        m = svm_train(y[:li]+y[(li+1):], x[:li]+x[(li+1):], '-c 4 -q')
+        if include_val:
+            m = svm_train(y[:li]+y[(li+1):], x[:li]+x[(li+1):], '-c 4 -q')
+        else:
+            m = svm_train(y[start:li]+y[(li+1):], x[start:li]+x[(li+1):], '-c 4 -q')
 
     p_label, (p_acc, lmsq_e, blub), p_val = svm_predict([y[li]], [x[li]], m)
     la = int(y[li])
-    if (p_acc >= 50): # either 100 or 0 for classification
+    #if (p_acc >= 50): # either 100 or 0 for classification
+    if int(p_label[0]) == la:
         if not la in ccount_label:
             ccount_label[la] = 0
         ccount_label[la] += 1
@@ -43,7 +65,7 @@ for li in range(start, end):
 
 
 print(f"Final prediction accuracy: {ccount}/{totcount}={ccount/totcount}")
-for k in totcount_label.keys():
+for k in ccount_label.keys():
     print(f"{k}: {ccount_label[k]}/{totcount_label[k]}={ccount_label[k]/totcount_label[k]}")
 
 print(f"Final prediction accuracy: {ccount}/{totcount}={ccount/totcount}")
