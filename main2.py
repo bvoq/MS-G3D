@@ -220,7 +220,7 @@ def get_parser():
 # TODO: Make sure the background shape is correct here:
 backgroundid = 334
 outputdim = 350
-embeddingtype = "forward" # either embed or forward
+embeddingtype = "forwardnosoftmax" # either "embed" or "forward" or "forwardnosoftmax"
 
 
 
@@ -770,6 +770,8 @@ class Processor():
                         data = data.type(torch.cuda.HalfTensor)
                     if embeddingtype == "embed":
                         output_encodings = self.model.getencoding(data) # data.float16().cuda(self.output_device)) # getencoding(data)
+                    elif embeddingtype == "forwardnosoftmax":
+                        output_encodings = self.model.forward(data)
                     else:
                         output_encodings = self.model.getsoftmax(data) # getsoftmax(data) # data.float16().cuda(self.output_device)) # getencoding(data)
                     print("index: ", index, " batchindex: ", batch_idx)
@@ -834,11 +836,11 @@ class Processor():
             print("no: ", no, " label: ", label)
 
         # storing the embeddings in a csv file
-        embeddings = open("forward.csv" if embeddingtype == "forward" else "embeddings.csv" , "w")
-        embeddings_all = open("forward_all.csv" if embeddingtype == "forward" else "embeddings_all.csv", "w")
-        embeddings_libsvm_all = open("forward_libsvm.data" if embeddingtype == "forward" else "embeddings_libsvm.data","w")
-        metadata = open("forward_labels.csv" if embeddingtype == "forward" else "embeddings_labels.csv", "w")
-        metadata_all = open("forward_labels_all.csv" if embeddingtype == "forward" else "embeddings_labels_all.csv", "w")
+        embeddings = open("forward.csv" if embeddingtype == "forward" else "embeddings.csv" if embeddingtype == "embed" else "forward_nosoftmax.csv", "w")
+        embeddings_all = open("forward_all.csv" if embeddingtype == "forward" else "embeddings_all.csv" if embeddingtype == "embed" else "forward_nosoftmax_all.csv", "w")
+        embeddings_libsvm_all = open("forward_libsvm.data" if embeddingtype == "forward" else "embeddings_libsvm.data" if embeddingtype == "embed" else "forward_nosoftmax_libsvm.data","w")
+        metadata = open("forward_labels.csv" if embeddingtype == "forward" else "embeddings_labels.csv" if embeddingtype == "embed" else "forward_nosoftmax_labels.csv", "w")
+        metadata_all = open("forward_labels_all.csv" if embeddingtype == "forward" else "embeddings_labels_all.csv" if embeddingtype == "embed" else "forward_nosoftmax_labels_all.csv", "w")
 
         print("length: ", totalvect, " ", vectw )
         gesture_matrix = torch.zeros([len(vect), vectw]) 
@@ -882,28 +884,28 @@ class Processor():
 
         print("gesture matrix")
         print(gesture_matrix)
-        g2 = gesture_matrix.clone()
-        sm = cosinesim(gesture_matrix,g2)
-        print("symmetry matrix")
-        print(sm)
+        #g2 = gesture_matrix.clone()
+        #sm = cosinesim(gesture_matrix,g2)
+        #print("symmetry matrix")
+        #print(sm)
 
-        f_cm = open("forward_cosinesim.csv" if embeddingtype == "forward" else "embed_cosinesim.csv","w")
-        incr = 0
-        thelist = []
-        for i in range(outputdim):
-            if i in vect:
-                f_cm.write(str(i))
-                for qi, q in enumerate(sm[incr,:]):
-                    if i != incrtoi[qi]:
-                        thelist.append((q.item(), rlabel[i], rlabel[incrtoi[qi]]))
-                        # f_cm.write(f"{rlabel[i]} ({i}) <->  {rlabel[incrtoi[qi]]} = {str(q.item())}\n")
-                incr += 1
+        #f_cm = open("forward_cosinesim.csv" if embeddingtype == "forward" else "embed_cosinesim.csv","w")
+        #incr = 0
+        #thelist = []
+        #for i in range(outputdim):
+        #    if i in vect:
+        #        f_cm.write(str(i))
+        #        for qi, q in enumerate(sm[incr,:]):
+        #            if i != incrtoi[qi]:
+        #                thelist.append((q.item(), rlabel[i], rlabel[incrtoi[qi]]))
+        #                # f_cm.write(f"{rlabel[i]} ({i}) <->  {rlabel[incrtoi[qi]]} = {str(q.item())}\n")
+        #        incr += 1
 
-        thelist.sort(reverse=True)
-        for (conf, l, r) in thelist:
-            f_cm.write(f"{conf},{l},{r}\n")
+        #thelist.sort(reverse=True)
+        #for (conf, l, r) in thelist:
+        #    f_cm.write(f"{conf},{l},{r}\n")
 
-        f_cm.close()
+        #f_cm.close()
 
 
     def start(self):

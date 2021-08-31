@@ -193,14 +193,25 @@ class Model(nn.Module):
         x = F.relu(self.sgcn3(x) + self.gcn3d3(x), inplace=True)
         x = self.tcn3(x)
 
-        out = x
+        out = x # 384 channel vector
         out_channels = out.size(1)
+        #return out # new embeddings
+        print("size1: ", out.size())
+        #embedding = out.view(N, -1) # M, out_channels, -1) # too large: batch_size x 1036800
         out = out.view(N, M, out_channels, -1)
+        print("size2a: ", N, " ", M, " ", out_channels, " -1")
+        print("size2: ", out.size())
         out = out.mean(3)   # Global Average Pooling (Spatial+Temporal)
-        out = out.mean(1)   # Average pool number of bodies in the sequence
+        print("size3: ", out.size())
+        embedding = out.view(N, -1) 
+        out = out.mean(1)   # Average pool number of bodies in the sequence, should be 1 anyway!
+        print("size4: ", out.size())
+        print("sizeem: ", embedding.size())
+        #return embedding
 
+        out = self.fc(out) # Linear layer from
+        print("size5: ", out.size())
         #print("final shape: ", out.size())
-        return out
 
     def getsoftmax(self, x):
         N, C, T, V, M = x.size()
