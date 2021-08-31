@@ -207,7 +207,7 @@ class Model(nn.Module):
         out = out.mean(1)   # Average pool number of bodies in the sequence, should be 1 anyway!
         print("size4: ", out.size())
         print("sizeem: ", embedding.size())
-        #return embedding
+        return out
 
         out = self.fc(out) # Linear layer from
         print("size5: ", out.size())
