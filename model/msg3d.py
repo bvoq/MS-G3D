@@ -203,15 +203,17 @@ class Model(nn.Module):
         print("size2: ", out.size())
         out = out.mean(3)   # Global Average Pooling (Spatial+Temporal)
         print("size3: ", out.size())
-        embedding = out.view(N, -1) 
+        #embedding = out.view(N, -1) 
         out = out.mean(1)   # Average pool number of bodies in the sequence, should be 1 anyway!
+        embedding = out
         print("size4: ", out.size())
-        print("sizeem: ", embedding.size())
-        return out
+
 
         out = self.fc(out) # Linear layer from
         print("size5: ", out.size())
         #print("final shape: ", out.size())
+        print("sizeem: ", embedding.size())
+        return out
 
     def getsoftmax(self, x):
         N, C, T, V, M = x.size()

@@ -220,7 +220,7 @@ def get_parser():
 # TODO: Make sure the background shape is correct here:
 backgroundid = 334
 outputdim = 350
-embeddingtype = "forwardnosoftmax" # either "embed" or "forward" or "forwardnosoftmax"
+embeddingtype = "embed" # either "embed" or "forward" or "forwardnosoftmax"
 
 
 
@@ -882,30 +882,30 @@ class Processor():
         embeddings.close()
         embeddings_all.close()
 
-        print("gesture matrix")
-        print(gesture_matrix)
-        g2 = gesture_matrix.clone()
-        sm = cosinesim(gesture_matrix,g2)
-        print("symmetry matrix")
-        print(sm)
+        #print("gesture matrix")
+        #print(gesture_matrix)
+        #g2 = gesture_matrix.clone()
+        #sm = cosinesim(gesture_matrix,g2)
+        #print("symmetry matrix")
+        #print(sm)
 
-        f_cm = open("forward_cosinesim.csv" if embeddingtype == "forward" else "embeddings_cosinesim.csv" if embeddingtype == "embed" else "forward_nosoftmax_cosinesim.csv","w")
-        incr = 0
-        thelist = []
-        for i in range(outputdim):
-            if i in vect:
-                f_cm.write(str(i))
-                for qi, q in enumerate(sm[incr,:]):
-                    if i != incrtoi[qi]:
-                        thelist.append((q.item(), rlabel[i], rlabel[incrtoi[qi]]))
-                        # f_cm.write(f"{rlabel[i]} ({i}) <->  {rlabel[incrtoi[qi]]} = {str(q.item())}\n")
-                incr += 1
+        #f_cm = open("forward_cosinesim.csv" if embeddingtype == "forward" else "embeddings_cosinesim.csv" if embeddingtype == "embed" else "forward_nosoftmax_cosinesim.csv","w")
+        #incr = 0
+        #thelist = []
+        #for i in range(outputdim):
+        #    if i in vect:
+        #        f_cm.write(str(i))
+        #        for qi, q in enumerate(sm[incr,:]):
+        #            if i != incrtoi[qi]:
+        #                thelist.append((q.item(), rlabel[i], rlabel[incrtoi[qi]]))
+        #                # f_cm.write(f"{rlabel[i]} ({i}) <->  {rlabel[incrtoi[qi]]} = {str(q.item())}\n")
+        #        incr += 1
 
-        thelist.sort(reverse=True)
-        for (conf, l, r) in thelist:
-            f_cm.write(f"{conf},{l},{r}\n")
+        #thelist.sort(reverse=True)
+        #for (conf, l, r) in thelist:
+        #    f_cm.write(f"{conf},{l},{r}\n")
 
-        f_cm.close()
+        #f_cm.close()
 
 
     def start(self):
