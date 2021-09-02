@@ -220,7 +220,7 @@ def get_parser():
 # TODO: Make sure the background shape is correct here:
 backgroundid = 334
 outputdim = 350
-embeddingtype = "embed" # either "embed" or "forward" or "forwardnosoftmax"
+embeddingtype = "" # either "embed" or "forward" or "forwardnosoftmax"
 
 
 
