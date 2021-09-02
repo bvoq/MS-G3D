@@ -2,8 +2,16 @@
 import pandas as pd
 import numpy as np
 from libsvm.svmutil import *
+from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.ensemble import RandomForestRegressor
+from sklearn.ensemble import AdaBoostClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.naive_bayes import GaussianNB
+from sklearn.gaussian_process import GaussianProcessClassifier
+from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
+from sklearn.svm import SVC
+from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import roc_auc_score
 
 dataset = "embeddings_bgasclass_tot"
@@ -46,15 +54,27 @@ print(len(X), " vs. ", len(y))
 
 include_val = False
 
-totcount = 0
-ccount = 0
-
 
 print(type(y))
+
+
+totcount = 0
+ccount = 0
 ccount_label = dict()
 totcount_label = dict()
 for li in range(start, end):
-    reg = RandomForestClassifier()
+    #KNeighborsClassifier(3),
+    #SVC(kernel="linear", C=0.025),
+    #SVC(gamma=2, C=1),
+    #GaussianProcessClassifier(1.0 * RBF(1.0)),
+    #DecisionTreeClassifier(max_depth=5),
+    #RandomForestClassifier(max_depth=5, n_estimators=10, max_features=1),
+    #MLPClassifier(alpha=1, max_iter=1000),
+    #AdaBoostClassifier(),
+    #GaussianNB(),
+    #QuadraticDiscriminantAnalysis()]
+    # default values
+    reg = SVC()
     if li == end-1:
         if include_val:
             reg.fit(X[:li],y[:li])
@@ -66,16 +86,13 @@ for li in range(start, end):
         #if include_val:
         #    reg.fit(np.concatenate((X[:li],X[(li+1):])),y[:li]+y[(li+1):])
         #else:
-        print(X.shape)
         Xcon = np.concatenate((X[start:li],X[(li+1):]), axis=0)
         ycon = np.concatenate((y[start:li],y[(li+1):]), axis=0)
-        print(Xcon.shape)
         reg.fit(Xcon, ycon)
 
 
     ypred = reg.predict([X[li]])
     la = int(y[li])
-    print(la, " ?= ",round(ypred[0]))
     if round(ypred[0]) == la:
         if not la in ccount_label:
             ccount_label[la] = 0
@@ -87,12 +104,431 @@ for li in range(start, end):
         totcount_label[la] = 0
     totcount_label[la] += 1
 
-print(f"Final prediction accuracy: {ccount}/{totcount}={ccount/totcount}")
+print(f"SVC accuracy: {ccount}/{totcount}={ccount/totcount:.4f}")
 for k in ccount_label.keys():
-    print(f"{k}: {ccount_label[k]}/{totcount_label[k]}={ccount_label[k]/totcount_label[k]}")
+    print(f"{k}: {ccount_label[k]}/{totcount_label[k]}={ccount_label[k]/totcount_label[k]:.4f}")
 
-print(f"Final prediction accuracy: {ccount}/{totcount}={ccount/totcount}")
 
+
+totcount = 0
+ccount = 0
+ccount_label = dict()
+totcount_label = dict()
+for li in range(start, end):
+    # NeighborsClassifier(3),
+    #SVC(kernel="linear", C=0.025),
+    #SVC(gamma=2, C=1),
+    #GaussianProcessClassifier(1.0 * RBF(1.0)),
+    #DecisionTreeClassifier(max_depth=5),
+    #RandomForestClassifier(max_depth=5, n_estimators=10, max_features=1),
+    #MLPClassifier(alpha=1, max_iter=1000),
+    #AdaBoostClassifier(),
+    #GaussianNB(),
+    #QuadraticDiscriminantAnalysis()]
+    # default values
+    reg = GaussianProcessClassifier()
+    if li == end-1:
+        if include_val:
+            reg.fit(X[:li],y[:li])
+        else:
+            reg.fit(X[start:li],y[start:li])
+    elif li == start:
+        reg.fit(X[li+1:end], y[li+1:end])
+    else:
+        #if include_val:
+        #    reg.fit(np.concatenate((X[:li],X[(li+1):])),y[:li]+y[(li+1):])
+        #else:
+        Xcon = np.concatenate((X[start:li],X[(li+1):]), axis=0)
+        ycon = np.concatenate((y[start:li],y[(li+1):]), axis=0)
+        reg.fit(Xcon, ycon)
+
+
+    ypred = reg.predict([X[li]])
+    la = int(y[li])
+    if round(ypred[0]) == la:
+        if not la in ccount_label:
+            ccount_label[la] = 0
+        ccount_label[la] += 1
+        ccount += 1
+
+    totcount += 1
+    if not la in totcount_label:
+        totcount_label[la] = 0
+    totcount_label[la] += 1
+
+print(f"GaussianProcessClassifier accuracy: {ccount}/{totcount}={ccount/totcount:.4f}")
+for k in ccount_label.keys():
+    print(f"{k}: {ccount_label[k]}/{totcount_label[k]}={ccount_label[k]/totcount_label[k]:.4f}")
+
+
+
+totcount = 0
+ccount = 0
+ccount_label = dict()
+totcount_label = dict()
+for li in range(start, end):
+    # NeighborsClassifier(3),
+    #SVC(kernel="linear", C=0.025),
+    #SVC(gamma=2, C=1),
+    #GaussianProcessClassifier(1.0 * RBF(1.0)),
+    #DecisionTreeClassifier(max_depth=5),
+    #RandomForestClassifier(max_depth=5, n_estimators=10, max_features=1),
+    #MLPClassifier(alpha=1, max_iter=1000),
+    #AdaBoostClassifier(),
+    #GaussianNB(),
+    #QuadraticDiscriminantAnalysis()]
+    # default values
+    reg = QuadraticDiscriminantAnalysis()
+    if li == end-1:
+        if include_val:
+            reg.fit(X[:li],y[:li])
+        else:
+            reg.fit(X[start:li],y[start:li])
+    elif li == start:
+        reg.fit(X[li+1:end], y[li+1:end])
+    else:
+        #if include_val:
+        #    reg.fit(np.concatenate((X[:li],X[(li+1):])),y[:li]+y[(li+1):])
+        #else:
+        Xcon = np.concatenate((X[start:li],X[(li+1):]), axis=0)
+        ycon = np.concatenate((y[start:li],y[(li+1):]), axis=0)
+        reg.fit(Xcon, ycon)
+
+
+    ypred = reg.predict([X[li]])
+    la = int(y[li])
+    if round(ypred[0]) == la:
+        if not la in ccount_label:
+            ccount_label[la] = 0
+        ccount_label[la] += 1
+        ccount += 1
+
+    totcount += 1
+    if not la in totcount_label:
+        totcount_label[la] = 0
+    totcount_label[la] += 1
+
+print(f"QuadraticDiscriminantAnalysis accuracy: {ccount}/{totcount}={ccount/totcount:.4f}")
+for k in ccount_label.keys():
+    print(f"{k}: {ccount_label[k]}/{totcount_label[k]}={ccount_label[k]/totcount_label[k]:.4f}")
+
+
+totcount = 0
+ccount = 0
+ccount_label = dict()
+totcount_label = dict()
+for li in range(start, end):
+    # NeighborsClassifier(3),
+    #SVC(kernel="linear", C=0.025),
+    #SVC(gamma=2, C=1),
+    #GaussianProcessClassifier(1.0 * RBF(1.0)),
+    #DecisionTreeClassifier(max_depth=5),
+    #RandomForestClassifier(max_depth=5, n_estimators=10, max_features=1),
+    #MLPClassifier(alpha=1, max_iter=1000),
+    #AdaBoostClassifier(),
+    #GaussianNB(),
+    #QuadraticDiscriminantAnalysis()]
+    # default values
+    reg = GaussianNB()
+    if li == end-1:
+        if include_val:
+            reg.fit(X[:li],y[:li])
+        else:
+            reg.fit(X[start:li],y[start:li])
+    elif li == start:
+        reg.fit(X[li+1:end], y[li+1:end])
+    else:
+        #if include_val:
+        #    reg.fit(np.concatenate((X[:li],X[(li+1):])),y[:li]+y[(li+1):])
+        #else:
+        Xcon = np.concatenate((X[start:li],X[(li+1):]), axis=0)
+        ycon = np.concatenate((y[start:li],y[(li+1):]), axis=0)
+        reg.fit(Xcon, ycon)
+
+
+    ypred = reg.predict([X[li]])
+    la = int(y[li])
+    if round(ypred[0]) == la:
+        if not la in ccount_label:
+            ccount_label[la] = 0
+        ccount_label[la] += 1
+        ccount += 1
+
+    totcount += 1
+    if not la in totcount_label:
+        totcount_label[la] = 0
+    totcount_label[la] += 1
+
+print(f"GaussianNB accuracy: {ccount}/{totcount}={ccount/totcount:.4f}")
+for k in ccount_label.keys():
+    print(f"{k}: {ccount_label[k]}/{totcount_label[k]}={ccount_label[k]/totcount_label[k]:.4f}")
+
+
+
+totcount = 0
+ccount = 0
+ccount_label = dict()
+totcount_label = dict()
+for li in range(start, end):
+    # NeighborsClassifier(3),
+    #SVC(kernel="linear", C=0.025),
+    #SVC(gamma=2, C=1),
+    #GaussianProcessClassifier(1.0 * RBF(1.0)),
+    #DecisionTreeClassifier(max_depth=5),
+    #RandomForestClassifier(max_depth=5, n_estimators=10, max_features=1),
+    #MLPClassifier(alpha=1, max_iter=1000),
+    #AdaBoostClassifier(),
+    #GaussianNB(),
+    #QuadraticDiscriminantAnalysis()]
+    # default values
+    reg = MLPClassifier()
+    if li == end-1:
+        if include_val:
+            reg.fit(X[:li],y[:li])
+        else:
+            reg.fit(X[start:li],y[start:li])
+    elif li == start:
+        reg.fit(X[li+1:end], y[li+1:end])
+    else:
+        #if include_val:
+        #    reg.fit(np.concatenate((X[:li],X[(li+1):])),y[:li]+y[(li+1):])
+        #else:
+        Xcon = np.concatenate((X[start:li],X[(li+1):]), axis=0)
+        ycon = np.concatenate((y[start:li],y[(li+1):]), axis=0)
+        reg.fit(Xcon, ycon)
+
+
+    ypred = reg.predict([X[li]])
+    la = int(y[li])
+    if round(ypred[0]) == la:
+        if not la in ccount_label:
+            ccount_label[la] = 0
+        ccount_label[la] += 1
+        ccount += 1
+
+    totcount += 1
+    if not la in totcount_label:
+        totcount_label[la] = 0
+    totcount_label[la] += 1
+
+print(f"MLPClassifier accuracy: {ccount}/{totcount}={ccount/totcount:.4f}")
+for k in ccount_label.keys():
+    print(f"{k}: {ccount_label[k]}/{totcount_label[k]}={ccount_label[k]/totcount_label[k]:.4f}")
+
+
+
+totcount = 0
+ccount = 0
+ccount_label = dict()
+totcount_label = dict()
+for li in range(start, end):
+    # NeighborsClassifier(3),
+    #SVC(kernel="linear", C=0.025),
+    #SVC(gamma=2, C=1),
+    #GaussianProcessClassifier(1.0 * RBF(1.0)),
+    #DecisionTreeClassifier(max_depth=5),
+    #RandomForestClassifier(max_depth=5, n_estimators=10, max_features=1),
+    #MLPClassifier(alpha=1, max_iter=1000),
+    #AdaBoostClassifier(),
+    #GaussianNB(),
+    #QuadraticDiscriminantAnalysis()]
+    # default values
+    reg = AdaBoostClassifier()
+    if li == end-1:
+        if include_val:
+            reg.fit(X[:li],y[:li])
+        else:
+            reg.fit(X[start:li],y[start:li])
+    elif li == start:
+        reg.fit(X[li+1:end], y[li+1:end])
+    else:
+        #if include_val:
+        #    reg.fit(np.concatenate((X[:li],X[(li+1):])),y[:li]+y[(li+1):])
+        #else:
+        Xcon = np.concatenate((X[start:li],X[(li+1):]), axis=0)
+        ycon = np.concatenate((y[start:li],y[(li+1):]), axis=0)
+        reg.fit(Xcon, ycon)
+
+
+    ypred = reg.predict([X[li]])
+    la = int(y[li])
+    if round(ypred[0]) == la:
+        if not la in ccount_label:
+            ccount_label[la] = 0
+        ccount_label[la] += 1
+        ccount += 1
+
+    totcount += 1
+    if not la in totcount_label:
+        totcount_label[la] = 0
+    totcount_label[la] += 1
+
+print(f"AdaBoostClassifier accuracy: {ccount}/{totcount}={ccount/totcount:.4f}")
+for k in ccount_label.keys():
+    print(f"{k}: {ccount_label[k]}/{totcount_label[k]}={ccount_label[k]/totcount_label[k]:.4f}")
+
+
+
+totcount = 0
+ccount = 0
+ccount_label = dict()
+totcount_label = dict()
+for li in range(start, end):
+    # NeighborsClassifier(3),
+    #SVC(kernel="linear", C=0.025),
+    #SVC(gamma=2, C=1),
+    #GaussianProcessClassifier(1.0 * RBF(1.0)),
+    #DecisionTreeClassifier(max_depth=5),
+    #RandomForestClassifier(max_depth=5, n_estimators=10, max_features=1),
+    #MLPClassifier(alpha=1, max_iter=1000),
+    #AdaBoostClassifier(),
+    #GaussianNB(),
+    #QuadraticDiscriminantAnalysis()]
+    # default values
+    reg = DecisionTreeClassifier()
+    if li == end-1:
+        if include_val:
+            reg.fit(X[:li],y[:li])
+        else:
+            reg.fit(X[start:li],y[start:li])
+    elif li == start:
+        reg.fit(X[li+1:end], y[li+1:end])
+    else:
+        #if include_val:
+        #    reg.fit(np.concatenate((X[:li],X[(li+1):])),y[:li]+y[(li+1):])
+        #else:
+        Xcon = np.concatenate((X[start:li],X[(li+1):]), axis=0)
+        ycon = np.concatenate((y[start:li],y[(li+1):]), axis=0)
+        reg.fit(Xcon, ycon)
+
+
+    ypred = reg.predict([X[li]])
+    la = int(y[li])
+    if round(ypred[0]) == la:
+        if not la in ccount_label:
+            ccount_label[la] = 0
+        ccount_label[la] += 1
+        ccount += 1
+
+    totcount += 1
+    if not la in totcount_label:
+        totcount_label[la] = 0
+    totcount_label[la] += 1
+
+print(f"Decision tree accuracy: {ccount}/{totcount}={ccount/totcount:.4f}")
+for k in ccount_label.keys():
+    print(f"{k}: {ccount_label[k]}/{totcount_label[k]}={ccount_label[k]/totcount_label[k]:.4f}")
+
+
+
+
+totcount = 0
+ccount = 0
+ccount_label = dict()
+totcount_label = dict()
+for li in range(start, end):
+    # NeighborsClassifier(3),
+    #SVC(kernel="linear", C=0.025),
+    #SVC(gamma=2, C=1),
+    #GaussianProcessClassifier(1.0 * RBF(1.0)),
+    #DecisionTreeClassifier(max_depth=5),
+    #RandomForestClassifier(max_depth=5, n_estimators=10, max_features=1),
+    #MLPClassifier(alpha=1, max_iter=1000),
+    #AdaBoostClassifier(),
+    #GaussianNB(),
+    #QuadraticDiscriminantAnalysis()]
+    # default values
+    reg = RandomForestClassifier(n_estimators=100, max_depth=None)
+    if li == end-1:
+        if include_val:
+            reg.fit(X[:li],y[:li])
+        else:
+            reg.fit(X[start:li],y[start:li])
+    elif li == start:
+        reg.fit(X[li+1:end], y[li+1:end])
+    else:
+        #if include_val:
+        #    reg.fit(np.concatenate((X[:li],X[(li+1):])),y[:li]+y[(li+1):])
+        #else:
+        Xcon = np.concatenate((X[start:li],X[(li+1):]), axis=0)
+        ycon = np.concatenate((y[start:li],y[(li+1):]), axis=0)
+        reg.fit(Xcon, ycon)
+
+
+    ypred = reg.predict([X[li]])
+    la = int(y[li])
+    #print(la, " ?= ",round(ypred[0]))
+    if round(ypred[0]) == la:
+        if not la in ccount_label:
+            ccount_label[la] = 0
+        ccount_label[la] += 1
+        ccount += 1
+
+    totcount += 1
+    if not la in totcount_label:
+        totcount_label[la] = 0
+    totcount_label[la] += 1
+
+print(f"Random forest accuracy: {ccount}/{totcount}={ccount/totcount:.4f}")
+for k in ccount_label.keys():
+    print(f"{k}: {ccount_label[k]}/{totcount_label[k]}={ccount_label[k]/totcount_label[k]:.4f}")
+
+
+
+
+
+
+for kn in range(1,10):
+    totcount = 0
+    ccount = 0
+    ccount_label = dict()
+    totcount_label = dict()
+    for li in range(start, end):
+        # NeighborsClassifier(3),
+        #SVC(kernel="linear", C=0.025),
+        #SVC(gamma=2, C=1),
+        #GaussianProcessClassifier(1.0 * RBF(1.0)),
+        #DecisionTreeClassifier(max_depth=5),
+        #RandomForestClassifier(max_depth=5, n_estimators=10, max_features=1),
+        #MLPClassifier(alpha=1, max_iter=1000),
+        #AdaBoostClassifier(),
+        #GaussianNB(),
+        #QuadraticDiscriminantAnalysis()]
+        # default values
+        reg = KNeighborsClassifier(n_neighbors=kn)
+        if li == end-1:
+            if include_val:
+                reg.fit(X[:li],y[:li])
+            else:
+                reg.fit(X[start:li],y[start:li])
+        elif li == start:
+            reg.fit(X[li+1:end], y[li+1:end])
+        else:
+            #if include_val:
+            #    reg.fit(np.concatenate((X[:li],X[(li+1):])),y[:li]+y[(li+1):])
+            #else:
+            Xcon = np.concatenate((X[start:li],X[(li+1):]), axis=0)
+            ycon = np.concatenate((y[start:li],y[(li+1):]), axis=0)
+            reg.fit(Xcon, ycon)
+    
+    
+        ypred = reg.predict([X[li]])
+        la = int(y[li])
+        if round(ypred[0]) == la:
+            if not la in ccount_label:
+                ccount_label[la] = 0
+            ccount_label[la] += 1
+            ccount += 1
+    
+        totcount += 1
+        if not la in totcount_label:
+            totcount_label[la] = 0
+        totcount_label[la] += 1
+
+    print(f"KNN ({str(kn)}) accuracy: {ccount}/{totcount}={ccount/totcount:.4f}")
+    for k in ccount_label.keys():
+        print(f"{k}: {ccount_label[k]}/{totcount_label[k]}={ccount_label[k]/totcount_label[k]:.4f}")
+    
 
 
 
