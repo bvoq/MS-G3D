@@ -33,8 +33,8 @@ X2 = df2.values
 
 # for testing embedding on a single vertex
 #X = X1 
-#X = X2
-X = np.concatenate((X1,X2),axis=1)
+X = X2
+#X = np.concatenate((X1,X2),axis=1)
 
 
 #X = list(X)
