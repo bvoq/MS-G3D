@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 from scipy import special as spc
 
-sentence = "./forward_ABfiller.csv"
+sentence = "./forward_bgasclass_ABfiller.txt"
 ground_truth = "./groundtruth_ABfiller.txt"
 
 df = pd.read_csv(sentence, sep='\t', header=None)
@@ -15,20 +15,16 @@ ground_truth = ground_truth_pd.to_numpy()
 shiftoffset = 15//2
 #df.transpose()
 
-
+backgroundclass = 334
 averageThresholding = False  # if false use k < Kappa heuristic, else avg heuristic
+removeProblematicGestures = False
 
 # ignore the gestures: ΓΕΝΝΩ (150) and ΕΝΤΑΞΕΙ(34)
-#arr = np.log(arr)
-#arr[:,204] = float('-inf')
-#arr[:,34] = float('-inf')
-#arr[:,150] = float('-inf')
-#arr=spc.softmax(arr,axis=1)
-#arr2 = arr.copy()
-arr = np.log(arr)
-arr[:,34]  = float('-inf')
-arr[:,150] = float('-inf')
-arr=spc.softmax(arr,axis=1)
+if removeProblematicGestures:
+    arr = np.log(arr)
+    arr[:,34]  = float('-inf')
+    arr[:,150] = float('-inf')
+    arr=spc.softmax(arr,axis=1)
 
 
 #[I 2021-09-18 00:45:05,746] Trial 380 finished with value: 10.003399999999942 and parameters: {'threshold': 0.0027337505179572943, 'mingest': 3, 'mingap': 5}. Best is trial 380 with value: 10.003399999999942.
@@ -37,46 +33,21 @@ arr=spc.softmax(arr,axis=1)
 
 def objective(trial):
 
-    #threshold = 0.02
-    #threshold = 0.005
-
-    threshold = trial.suggest_uniform("threshold",0.0001,0.01)
+    threshold = trial.suggest_uniform("threshold",0.0001,1.0)
+    #threshold = 0.070198773686484
     predictions = []
+    mingesturesize = 4
+    mingapsize = 4
+    #mingesturesize = trial.suggest_int("mingesturesize",1,6)
+    #mingapsize = trial.suggest_int("mingapsize",1,6)
+
+    #threshold = 0.07032982142757253
+    #mingesturesize = 6
+    #mingapsize = 2
     print(arr.shape)
     # temporal convolutions over XYZ
     for row in range(arr.shape[0]):
-        totalsum = 0
-    
-        #order = arr[row,:].argsort()
-        arr[row,:].sort()
-        arr[row,:] = arr[row, ::-1]
-        equal_arr = True
-        for ia, a in enumerate(arr[row,:]):
-            if row > 0 and arr[row-1,ia] != a:
-                equal_arr = False
-        #if row > 0 and equal_arr:
-        #    print("done")
-        #    break
-        #sorted = np.take(v, order, 0)
-        for col in range(arr.shape[1]):
-            totalsum += arr[row][col] * arr[row][col]
-
-        newsum = 0
-        avg = 0
-        minindex = -1
-        for col in range(arr.shape[1]):
-            newsum += arr[row][col] * arr[row][col]
-            avg += arr[row][col]
-            if newsum >= (1 - threshold) * totalsum:
-                minindex = col
-                break
-
-        avg = avg / (minindex+1) 
-
-        if averageThresholding:
-            predictions.append(int(avg >= avgb))
-        else:
-            predictions.append(int(minindex <= kgap))
+        predictions.append(int(arr[row][backgroundclass] < threshold))
     
     #assert(mingapsize <= mingesturesize)
     #print("predlen ", len(predictions)) 
@@ -123,7 +94,8 @@ def objective(trial):
                         predictions[ip] = 1
     
     
-    err = 0
+    err = 0 # actual error
+    totposserr = 0 # total possible error
     predstate = 0
     truthstate = 0
     for row in range(len(predictions)):
@@ -136,24 +108,32 @@ def objective(trial):
         if pred == 0:
             if predstate == 1:
                 err += 1
+            elif predstate == 2:
+                totposserr += 1
             if predstate != -2:
                 predstate = -1
 
         if truth == 0:
             if truthstate == 1:
                 err += 1
+            elif truthstate == 2:
+                totposserr += 1
             if truthstate != -2:
                 truthstate = -1
 
         if pred == 1:
             if predstate == -1:
                 err += 1
+            elif predstate == -2:
+                totposserr += 1
             if predstate != 2:
                 predstate = 1
 
         if truth == 1:
             if truthstate == -1:
                 err += 1
+            elif truthstate == -2:
+                totposserr += 1
             if truthstate != 2:
                 truthstate = 1
 
@@ -167,17 +147,18 @@ def objective(trial):
 
 
         if pred != truth:
-            err += 0.00001 # small complaints about alignment
+            err += 0.00001 # to correct small alignment issues
+        #totposserr += 0.00001
         #print("pred/real: ", pred, "/", truth, " ", minindex)
 
-    for p in predictions:
-        print(p)
+    #for p in predictions:
+    #    print(p)
+    #with open('outpred_bgasclass.txt','w') as fout:
+    #    for p in predictions:
+    #        print(p)
+    #        print(p, file=fout)
 
-    with open('outpred.txt','w') as fout:
-        for p in predictions:
-            print(p)
-            print(p, file=fout)
-
+    print("error: ", err, "/", totposserr, "=", (err/totposserr)) # 189
     return err
 
 
@@ -186,7 +167,7 @@ def objective(trial):
 #objective(0)
 
 study = optuna.create_study(direction="minimize") #optuna.load_study(study_name='study1', storage='sqlite:///study1.db')
-study.optimize(objective, n_trials=1)
+study.optimize(objective, n_trials=1000)
 print('Best value: {} (params: {})\n'.format(study.best_value, study.best_params))
 
 #for p in predictions:

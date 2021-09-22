@@ -3,6 +3,7 @@ import optuna
 import pandas as pd
 import numpy as np
 from scipy import special as spc
+import sys
 
 sentence = "./forward_ABfiller.csv"
 ground_truth = "./groundtruth_ABfiller.txt"
@@ -15,20 +16,18 @@ ground_truth = ground_truth_pd.to_numpy()
 shiftoffset = 15//2
 #df.transpose()
 
+mges = int(sys.argv[1])
+mgas= int(sys.argv[2])
 
 averageThresholding = False  # if false use k < Kappa heuristic, else avg heuristic
+removeProblematicGestures = False
 
 # ignore the gestures: ΓΕΝΝΩ (150) and ΕΝΤΑΞΕΙ(34)
-#arr = np.log(arr)
-#arr[:,204] = float('-inf')
-#arr[:,34] = float('-inf')
-#arr[:,150] = float('-inf')
-#arr=spc.softmax(arr,axis=1)
-#arr2 = arr.copy()
-arr = np.log(arr)
-arr[:,34]  = float('-inf')
-arr[:,150] = float('-inf')
-arr=spc.softmax(arr,axis=1)
+if removeProblematicGestures:
+    arr = np.log(arr)
+    arr[:,34]  = float('-inf')
+    arr[:,150] = float('-inf')
+    arr=spc.softmax(arr,axis=1)
 
 
 #[I 2021-09-18 00:45:05,746] Trial 380 finished with value: 10.003399999999942 and parameters: {'threshold': 0.0027337505179572943, 'mingest': 3, 'mingap': 5}. Best is trial 380 with value: 10.003399999999942.
@@ -40,11 +39,12 @@ def objective(trial):
     #threshold = 0.02
     #threshold = 0.005
 
-    #threshold = trial.suggest_uniform("threshold",0.0001,0.01)
+    threshold = trial.suggest_loguniform("threshold",0.0001,0.1)
     #mask = trial.suggest_categorical("mask", [i for i in range(1,349)])
     #avgb = trial.suggest_loguniform("avgb",0.01,1.0)
-    #mingesturesize = trial.suggest_int("mingest",4,4)
-    #mingapsize = trial.suggest_int("mingap",4,4)
+    kgap = trial.suggest_int("kgap",5,50)
+    mingesturesize = trial.suggest_int("mingest",mges,mges)
+    mingapsize = trial.suggest_int("mingap",mgas,mgas)
     #for dimensional kappa heuristic use:
     #kgap = 20
     # without 204
@@ -53,11 +53,14 @@ def objective(trial):
     #threshold = 0.007311583657192341
     #avgb = 0.05995041942033172
     #Trial 63 finished with value: 10.003439999999943 and parameters:
-    threshold= 0.0055#551231801663363
-    mingesturesize=4
-    mingapsize=4
-    kgap = 16 #': 4, 'mingap': 4, 'k': 16}. Best is trial 44 with value: 10.003439999999943.
+    #kgap=16
+    #threshold= 0.0055#551231801663363
+    #mingesturesize=4
+    #mingapsize=4
 
+
+    #best value without removing gestures
+    #14.003519999999932 (params: {'threshold': 0.009991194755891903, 'kgap': 8})
 
 
     #threshold = 0.003
@@ -80,12 +83,20 @@ def objective(trial):
     #avgb = 0.16523421382534814
     #threshold = 0.0368307053535747
 
+
+
+    # without any
+    #Best value: 14.003659999999893 (params: {'threshold': 0.005178961664345628, 'kgap': 17, 'mingest': 2, 'mingap': 4})
+    #threshold = 0.005178961664345628
+    #kgap = 17
+    #mingesturesize = 2
+    #mingapsize = 4
+
     predictions = []
     print(arr.shape)
-    # temporal convolutions over XYZ
+    # future: try temporal convolutions over XYZ
     for row in range(arr.shape[0]):
         totalsum = 0
-    
         #order = arr[row,:].argsort()
         arr[row,:].sort()
         arr[row,:] = arr[row, ::-1]
@@ -166,7 +177,8 @@ def objective(trial):
                         predictions[ip] = 1
     
     
-    err = 0
+    err = 0 # actual error
+    totposserr = 0 # total possible error
     predstate = 0
     truthstate = 0
     for row in range(len(predictions)):
@@ -179,24 +191,32 @@ def objective(trial):
         if pred == 0:
             if predstate == 1:
                 err += 1
+            elif predstate == 2:
+                totposserr += 1
             if predstate != -2:
                 predstate = -1
 
         if truth == 0:
             if truthstate == 1:
                 err += 1
+            elif truthstate == 2:
+                totposserr += 1
             if truthstate != -2:
                 truthstate = -1
 
         if pred == 1:
             if predstate == -1:
                 err += 1
+            elif predstate == -2:
+                totposserr += 1
             if predstate != 2:
                 predstate = 1
 
         if truth == 1:
             if truthstate == -1:
                 err += 1
+            elif truthstate == -2:
+                totposserr += 1
             if truthstate != 2:
                 truthstate = 1
 
@@ -210,7 +230,8 @@ def objective(trial):
 
 
         if pred != truth:
-            err += 0.00001 # small complaints about alignment
+            err += 0.00001 # to correct small alignment issues
+        #totposserr += 0.00001
         #print("pred/real: ", pred, "/", truth, " ", minindex)
 
     for p in predictions:
@@ -221,6 +242,7 @@ def objective(trial):
             print(p)
             print(p, file=fout)
 
+    print("error: ", err, "/", totposserr, "=", (err/totposserr)) # 189
     return err
 
 
@@ -229,7 +251,7 @@ def objective(trial):
 #objective(0)
 
 study = optuna.create_study(direction="minimize") #optuna.load_study(study_name='study1', storage='sqlite:///study1.db')
-study.optimize(objective, n_trials=1)
+study.optimize(objective, n_trials=1000)
 print('Best value: {} (params: {})\n'.format(study.best_value, study.best_params))
 
 #for p in predictions:
