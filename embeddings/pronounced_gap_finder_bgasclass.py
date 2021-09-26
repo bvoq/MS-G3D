@@ -34,24 +34,24 @@ if removeProblematicGestures:
 def objective(trial):
 
     threshold = trial.suggest_uniform("threshold",0.0001,1.0)
-    #threshold = 0.070198773686484
-    predictions = []
-    mingesturesize = 4
-    mingapsize = 4
     #mingesturesize = trial.suggest_int("mingesturesize",1,6)
     #mingapsize = trial.suggest_int("mingapsize",1,6)
+    predictions = []
+    #12 error
+    threshold = 0.071
+    mingesturesize = 4
+    mingapsize = 4
 
-    #threshold = 0.07032982142757253
+    #8 error
+    #threshold = 0.071#032982142757253
     #mingesturesize = 6
     #mingapsize = 2
     print(arr.shape)
     # temporal convolutions over XYZ
     for row in range(arr.shape[0]):
         predictions.append(int(arr[row][backgroundclass] < threshold))
-    
     #assert(mingapsize <= mingesturesize)
     #print("predlen ", len(predictions)) 
-    
     for noisesize in range(1,max(mingesturesize, mingapsize)+1):
         if noisesize <= mingesturesize:
             for ip, p in enumerate(predictions):
@@ -146,19 +146,19 @@ def objective(trial):
             truthstate = -2
 
 
-        if pred != truth:
-            err += 0.00001 # to correct small alignment issues
+        #if pred != truth:
+        #    err += 0.00001 # to correct small alignment issues
         #totposserr += 0.00001
         #print("pred/real: ", pred, "/", truth, " ", minindex)
 
-    #for p in predictions:
-    #    print(p)
-    #with open('outpred_bgasclass.txt','w') as fout:
-    #    for p in predictions:
-    #        print(p)
-    #        print(p, file=fout)
+    for p in predictions:
+        print(p)
+    with open('outpred_bgasclass.txt','w') as fout:
+        for p in predictions:
+            print(p)
+            print(p, file=fout)
 
-    print("error: ", err, "/", totposserr, "=", (err/totposserr)) # 189
+    print("error: ", err, "/", totposserr, "=", 1-(err/totposserr)) # 189
     return err
 
 
@@ -167,7 +167,7 @@ def objective(trial):
 #objective(0)
 
 study = optuna.create_study(direction="minimize") #optuna.load_study(study_name='study1', storage='sqlite:///study1.db')
-study.optimize(objective, n_trials=1000)
+study.optimize(objective, n_trials=1)
 print('Best value: {} (params: {})\n'.format(study.best_value, study.best_params))
 
 #for p in predictions:

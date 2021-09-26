@@ -40,18 +40,10 @@ def objective(trial):
     #threshold = 0.005
 
     threshold = trial.suggest_loguniform("threshold",0.0001,0.1)
-    #mask = trial.suggest_categorical("mask", [i for i in range(1,349)])
-    #avgb = trial.suggest_loguniform("avgb",0.01,1.0)
     kgap = trial.suggest_int("kgap",5,50)
     mingesturesize = trial.suggest_int("mingest",mges,mges)
     mingapsize = trial.suggest_int("mingap",mgas,mgas)
-    #for dimensional kappa heuristic use:
-    #kgap = 20
-    # without 204
-    #mingesturesize = 2
-    #mingapsize = 5
-    #threshold = 0.007311583657192341
-    #avgb = 0.05995041942033172
+    # WITH REMOVING 34, 150 BEST IS:
     #Trial 63 finished with value: 10.003439999999943 and parameters:
     #kgap=16
     #threshold= 0.0055#551231801663363
@@ -59,8 +51,12 @@ def objective(trial):
     #mingapsize=4
 
 
-    #best value without removing gestures
-    #14.003519999999932 (params: {'threshold': 0.009991194755891903, 'kgap': 8})
+    #BEST WITHOUT removing gestures
+    #10.003569999999941 (params: {'threshold': 0.007078256013118153, 'kgap': 8, 'mingest': 3, 'mingap': 3})
+    kgap = 8
+    threshold = 0.007#078256013118153
+    mingesturesize = 3
+    mingapsize = 3
 
 
     #threshold = 0.003
@@ -229,8 +225,9 @@ def objective(trial):
             truthstate = -2
 
 
-        if pred != truth:
-            err += 0.00001 # to correct small alignment issues
+
+        #if pred != truth:
+        #    err += 0.00001 # to correct small alignment issues
         #totposserr += 0.00001
         #print("pred/real: ", pred, "/", truth, " ", minindex)
 
@@ -242,7 +239,7 @@ def objective(trial):
             print(p)
             print(p, file=fout)
 
-    print("error: ", err, "/", totposserr, "=", (err/totposserr)) # 189
+    print("error: ", err, "/", totposserr, "=", 1-(err/totposserr)) # 189
     return err
 
 
@@ -251,7 +248,7 @@ def objective(trial):
 #objective(0)
 
 study = optuna.create_study(direction="minimize") #optuna.load_study(study_name='study1', storage='sqlite:///study1.db')
-study.optimize(objective, n_trials=1000)
+study.optimize(objective, n_trials=1)
 print('Best value: {} (params: {})\n'.format(study.best_value, study.best_params))
 
 #for p in predictions:
